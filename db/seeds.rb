@@ -27,7 +27,7 @@ service_user_3.save()
 worker_1 = Worker.new({
   'name' => 'James T.',
   'gender' => 'm',
-  'can_drive' => TRUE,
+  'can_drive' => true,
   'hourly_rate' => 10.50,
   'experience' => 'Visual Impairment, Autism, First Aid'
   })
@@ -36,7 +36,7 @@ worker_1.save()
 worker_2 = Worker.new({
   'name' => 'Lorna H.',
   'gender' => 'f',
-  'can_drive' => FALSE,
+  'can_drive' => false,
   'hourly_rate' => 8.75,
   'experience' => 'Sign Language, Autism, Children'
   })
@@ -45,7 +45,7 @@ worker_2.save()
 worker_3 = Worker.new({
   'name' => 'Bob L.',
   'gender' => 'm',
-  'can_drive' => TRUE,
+  'can_drive' => true,
   'hourly_rate' => 9.20,
   'experience' => 'Moving and Handling'
   })

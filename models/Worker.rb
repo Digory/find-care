@@ -24,7 +24,7 @@ class Worker
 
   def update()
     sql = "UPDATE workers SET (name, gender, can_drive, hourly_rate, experience) = ($1, $2, $3, $4, $5) WHERE id = $6"
-    values = [@name, @gender, @can_drive, @hourly_rate, @experience @id]
+    values = [@name, @gender, @can_drive, @hourly_rate, @experience, @id]
     SqlRunner.run(sql, values)
   end
 

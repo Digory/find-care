@@ -6,7 +6,7 @@ class SqlRunner
     begin
       db = PG.connect({dbname: 'care', host: 'localhost'})
       db.prepare("query", sql)
-      db.exec_prepared("query", values)
+      result = db.exec_prepared("query", values)
     ensure
       db.close() if db != nil
     end
