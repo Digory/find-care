@@ -18,7 +18,7 @@ CREATE TABLE workers(
 );
 
 CREATE TABLE visits(
-  id SERIAL8,
-  service_user_id INT8 REFERENCES service_users(id),
-  worker_id INT8 REFERENCES workers(id)
+  id SERIAL8 PRIMARY KEY,
+  service_user_id INT8 REFERENCES service_users(id) ON DELETE CASCADE,
+  worker_id INT8 REFERENCES workers(id) ON DELETE CASCADE
 );

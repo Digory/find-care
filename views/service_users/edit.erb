@@ -1,0 +1,8 @@
+<h1>Edit Service User</h1>
+<form method="POST" action="/service_users/<%=@service_user.id%>">
+  <label for="service-user-name">Name:</label>
+  <input id="service-user-name" type="text" name="name" value="<%= @service_user.name() %>"/>
+  <label for="weekly-budget">Weekly Budget:</label>
+  <input id="weekly-budget" type="number" name="weekly_budget" value="<%= @service_user.weekly_budget() %>"/>
+  <input type="submit" value="Update Service User"/>
+</form>
