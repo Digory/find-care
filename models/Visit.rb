@@ -4,6 +4,8 @@ require_relative('ServiceUser.rb')
 
 class Visit
 
+  attr_reader :id, :service_user_id, :worker_id
+
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @service_user_id = options['service_user_id'].to_i
@@ -44,7 +46,7 @@ class Visit
   end
 
   def self.all()
-    sql = "SELECT * visits"
+    sql = "SELECT * FROM visits"
     results = SqlRunner.run(sql)
     return results.map{|visit_info| Visit.new(visit_info)}
   end
