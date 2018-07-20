@@ -2,8 +2,8 @@ require_relative('../models/ServiceUser.rb')
 require_relative('../models/Worker.rb')
 require_relative('../models/Visit.rb')
 
-Worker.delete_all()
 ServiceUser.delete_all()
+Worker.delete_all()
 
 service_user_1 = ServiceUser.new({
   'name' => 'M. Stephens',
@@ -57,7 +57,7 @@ visit_1 = Visit.new({
 visit_1.save()
 
 visit_2 = Visit.new({
-  'service_user_id' => service_user_2.id,
+  'service_user_id' => service_user_1.id,
   'worker_id' => worker_1.id
   })
 visit_2.save()

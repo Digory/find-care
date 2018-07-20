@@ -69,4 +69,11 @@ class Worker
     sql = "DELETE FROM workers"
     SqlRunner.run(sql)
   end
+
+  def self.find(gender)
+    sql = "SELECT * FROM workers WHERE gender = $1"
+    values = [gender]
+    results = SqlRunner.run(sql, values)
+    return results.map{|worker_info| Worker.new(worker_info)}
+  end
 end

@@ -4,7 +4,7 @@ require_relative('Visit.rb')
 
 class ServiceUser
 
-  attr_reader :id, :name, :weekly_budget
+  attr_accessor :id, :name, :weekly_budget
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
