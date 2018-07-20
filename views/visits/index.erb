@@ -2,5 +2,5 @@
 
 
   <% for visit in @visits %>
-  <p> <%= visit.service_user_id() %>
+  <p> <a href="/visits/<%=visit.id()%>"><%= visit.id() %></a>
   <% end %>

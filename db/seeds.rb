@@ -2,7 +2,6 @@ require_relative('../models/ServiceUser.rb')
 require_relative('../models/Worker.rb')
 require_relative('../models/Visit.rb')
 
-Visit.delete_all()
 Worker.delete_all()
 ServiceUser.delete_all()
 

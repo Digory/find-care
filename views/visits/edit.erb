@@ -1,0 +1,8 @@
+<h1>Edit Visit</h1>
+<form method="POST" action="/visits/<%=@visit.id()%>">
+  <label for="service-user-id">Service User ID:</label>
+  <input id="service-user-id" type="number" name="service_user_id" value="<%=@visit.service_user_id()%>"/>
+  <label for="worker-id">Worker ID:</label>
+  <input id="worker-id" type="number" name="worker_id" value="<%=@visit.worker_id()%>"/>
+  <input type="submit" value="update visit"/>
+</form>

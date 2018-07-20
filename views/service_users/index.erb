@@ -2,5 +2,5 @@
 
 
   <% for service_user in @service_users %>
-  <p> <%= service_user.name() %>
+  <p> <a href="/service_users/<%=service_user.id()%>"><%= service_user.name() %></a>
   <% end %>
