@@ -1,5 +1,6 @@
 require_relative('../db/sql_runner.rb')
 require_relative('Worker.rb')
+require_relative('Visit.rb')
 
 class ServiceUser
 
@@ -33,6 +34,13 @@ class ServiceUser
     values = [@id]
     results = SqlRunner.run(sql, values)
     return results.map{|worker_info| Worker.new(worker_info)}
+  end
+
+  def visits()
+    sql = "SELECT * FROM visits WHERE service_user_id = $1"
+    values = [@id]
+    results = SqlRunner.run(sql, values)
+    return results.map{|visit_info| Visit.new(visit_info)}
   end
 
   def self.all()
