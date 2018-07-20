@@ -1,0 +1,22 @@
+<h1>Create new worker</h1>
+
+<form method="POST" action="/workers">
+  <label for="worker-name">Name of worker:</label>
+  <input id="worker-name" type="text" name="name">
+  <label for="worker-gender">Gender:</label>
+  <select id="worker-gender" name="gender">
+    <option value="m">male</option>
+    <option value="f">female</option>
+  </select>
+  <label for="worker-can-drive">Can you drive?</label>
+  <select id="worker-can-drive" name="can_drive">
+    <option value="true">yes</option>
+    <option value="false">no</option>
+  </select>
+  <label for="hourly-rate">Hourly rate:</label>
+  <input id="hourly-rate" type="text" name="hourly_rate">
+  <label for="worker-experience">Experience:</label>
+  <input id="worker-experience" type="text" name="experience">
+  
+    <input type="submit" value="Create worker">
+</form>

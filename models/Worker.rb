@@ -4,7 +4,7 @@ require_relative('Visit.rb')
 
 class Worker
 
-  attr_reader :id, :name
+  attr_reader :id, :name, :gender, :can_drive, :hourly_rate, :experience
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
@@ -13,6 +13,10 @@ class Worker
     @can_drive = options['can_drive']
     @hourly_rate = options['hourly_rate'].to_f
     @experience = options['experience']
+  end
+
+  def get_info()
+    return "#{@name}, gender: #{@gender}, can drive: #{@can_drive}, hourly rate: #{@hourly_rate}, experience: #{@experience}"
   end
 
   def save()
@@ -58,7 +62,7 @@ class Worker
     sql = "SELECT * FROM workers WHERE id = $1"
     values = [id]
     result = SqlRunner.run(sql, values)
-    return ServiceUser.new(result.first)
+    return Worker.new(result.first)
   end
 
   def self.delete_all()

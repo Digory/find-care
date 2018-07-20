@@ -1,0 +1,30 @@
+<h1>Edit worker</h1>
+
+<form method="POST" action="/workers/<%=@worker.id%>">
+  <label for="worker-name">Name of worker:</label>
+  <input id="worker-name" type="text" name="name" value="<%=@worker.name()%>">
+  <label for="worker-gender">Gender:</label>
+  <select id="worker-gender" name="gender">
+
+    <option value="m" <%= "selected" if @worker.gender() == "m"%>>male</option>
+
+    <option value="f" <%= "selected" if @worker.gender() == "f"%>>female</option>
+
+  </select>
+
+  <label for="worker-can-drive">Can you drive?</label>
+  <select id="worker-can-drive" name="can_drive">
+
+    <option value="true" <%= "selected" if @worker.can_drive() == "t"%>>yes</option>
+
+    <option value="false" <%= "selected" if @worker.can_drive() == "f"%>>no</option>
+
+  </select>
+
+  <label for="hourly-rate">Hourly rate:</label>
+  <input id="hourly-rate" type="text" name="hourly_rate" value="<%=@worker.hourly_rate()%>">
+  <label for="worker-experience">Experience:</label>
+  <input id="worker-experience" type="text" name="experience" value="<%=@worker.experience()%>">
+
+    <input type="submit" value="Update worker">
+</form>

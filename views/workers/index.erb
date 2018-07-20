@@ -2,5 +2,5 @@
 
 
   <% for worker in @workers %>
-  <p> <%= worker.name() %>
+  <p> <a href="/workers/<%=worker.id()%>"><%= worker.get_info() %></a></p>
   <% end %>
