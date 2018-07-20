@@ -51,7 +51,7 @@ class ServiceUserTest < MiniTest::Test
 
   def test_workers_returns_array_of_correct_size()
     actual = @seeds.service_user_1.workers().length()
-    assert_equal(2, actual)
+    assert_equal(1, actual)
   end
 
   def test_visits_returns_array_of_correct_size()

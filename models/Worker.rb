@@ -4,7 +4,7 @@ require_relative('Visit.rb')
 
 class Worker
 
-  attr_reader :id, :name, :gender, :can_drive, :hourly_rate, :experience
+  attr_accessor :id, :name, :gender, :can_drive, :hourly_rate, :experience
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
@@ -39,7 +39,7 @@ class Worker
   end
 
   def service_users()
-    sql = "SELECT service_users.* FROM service_users INNER JOIN visits ON service_user.id = visits.service_user_id WHERE visits.worker_id = $1"
+    sql = "SELECT DISTINCT service_users.* FROM service_users INNER JOIN visits ON service_users.id = visits.service_user_id WHERE visits.worker_id = $1"
     values = [@id]
     results = SqlRunner.run(sql, values)
     return results.map{|service_user_info| ServiceUser.new(service_user_info)}
@@ -70,7 +70,7 @@ class Worker
     SqlRunner.run(sql)
   end
 
-  def self.find(gender)
+  def self.find_by_gender(gender)
     sql = "SELECT * FROM workers WHERE gender = $1"
     values = [gender]
     results = SqlRunner.run(sql, values)

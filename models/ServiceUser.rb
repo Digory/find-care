@@ -32,7 +32,7 @@ class ServiceUser
   end
 
   def workers()
-    sql = "SELECT workers.* FROM workers INNER JOIN visits ON workers.id = visits.worker_id WHERE visits.service_user_id = $1"
+    sql = "SELECT DISTINCT workers.* FROM workers INNER JOIN visits ON workers.id = visits.worker_id WHERE visits.service_user_id = $1"
     values = [@id]
     results = SqlRunner.run(sql, values)
     return results.map{|worker_info| Worker.new(worker_info)}
