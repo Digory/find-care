@@ -2,7 +2,9 @@ require_relative('../db/sql_runner.rb')
 require_relative('ServiceUser.rb')
 require_relative('Visit.rb')
 
-class ServiceUser
+class Worker
+
+  attr_reader :id
 
   def initialize(options)
     @id = options['id'].to_i if options['id']

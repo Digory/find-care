@@ -4,15 +4,17 @@ require_relative('Visit.rb')
 
 class ServiceUser
 
+  attr_reader :id
+
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @name = options['name']
-    @budget = options['budget'].to_f
+    @weekly_budget = options['weekly_budget'].to_f
   end
 
   def save()
     sql = "INSERT INTO service_users(name, weekly_budget) VALUES($1, $2) RETURNING id"
-    values = [@name, @budget]
+    values = [@name, @weekly_budget]
     result = SqlRunner.run(sql,values)
     @id = result.first['id'].to_i
   end
