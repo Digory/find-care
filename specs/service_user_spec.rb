@@ -15,11 +15,11 @@ class ServiceUserTest < MiniTest::Test
   end
 
   def test_save()
-    @service_user_4 = ServiceUser.new({
+    service_user_4 = ServiceUser.new({
       'name' => 'J. Robertson',
       'weekly_budget' => 380
       })
-    @service_user_4.save()
+    service_user_4.save()
     actual = ServiceUser.all().length()
     assert_equal(4, actual)
   end
