@@ -2,6 +2,7 @@ require('sinatra')
 require('sinatra/contrib/all') if development?
 also_reload('../models/*')
 require_relative('../models/ServiceUser')
+require_relative('../models/CheckDate')
 
 # INDEX
 

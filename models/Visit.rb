@@ -21,6 +21,26 @@ class Visit
     return "#{worker.name()} is coming on #{@visit_date} at #{@visit_time} for #{@duration} hours, at a cost of: £#{worker_cost}"
   end
 
+  def get_database_visit_date()
+    sql = "SELECT visits.visit_date FROM visits WHERE id = $1"
+    values = [@id]
+    result = SqlRunner.run(sql, values)
+    return result.first['visit_date']
+  end
+
+  def get_database_visit_time()
+    sql = "SELECT visits.visit_time FROM visits WHERE id = $1"
+    values = [@id]
+    result = SqlRunner.run(sql, values)
+    return result.first['visit_time']
+  end
+
+  def increase_date_by_a_week()
+    sql = "UPDATE visits SET visit_date = visit_date + 7 WHERE id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
+
   def save()
     sql = "INSERT INTO visits(service_user_id, worker_id, visit_date, visit_time, duration) VALUES($1, $2, $3, $4, $5) RETURNING id"
     values = [@service_user_id, @worker_id, @visit_date, @visit_time, @duration]

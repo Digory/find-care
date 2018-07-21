@@ -61,7 +61,7 @@ class SeedsForTesting
     @visit_1 = Visit.new({
       'service_user_id' => service_user_1.id,
       'worker_id' => worker_1.id,
-      'visit_date' => '2018-08-01',
+      'visit_date' => '2018-06-01',
       'visit_time' => '09:00:00',
       'duration' => 2.5
       })
