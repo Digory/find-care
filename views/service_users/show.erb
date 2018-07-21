@@ -7,7 +7,7 @@
   <input type="submit" value="DELETE">
 </form>
 
-<form action="/workers/search_results" method="POST">
+<form action="/workers/search_results/<%=@service_user.id()%>" method="POST">
   <label for="search-bar">Search:</label>
   <input id="search-bar" name="query"type="text"/>
   <input type="submit" value="SEARCH">

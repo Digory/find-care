@@ -1,5 +1,7 @@
 <h1>Results:</h1>
 
 <% for worker in @found_workers %>
-  <p><a href="/workers/<%=worker.id()%>"><%=worker.get_info()%></a></p>
+<form action="/workers/<%=worker.id()%>/book_worker/<%=@service_user.id()%>" method="POST">
+  <input type="submit" value="<%=worker.get_info()%>">
+  <!-- <p><a href="/workers/<%=worker.id()%>/book_worker"><%=worker.get_info()%></a></p> -->
   <% end %>

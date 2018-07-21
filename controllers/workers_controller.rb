@@ -2,6 +2,8 @@ require('sinatra')
 require('sinatra/contrib/all') if development?
 also_reload('../models/*')
 require_relative('../models/Worker')
+require_relative('../models/ServiceUser')
+require_relative('../models/Visit')
 
 # INDEX
 
@@ -40,8 +42,9 @@ end
 
 # SEARCH
 
-post '/workers/search_results' do
+post '/workers/search_results/:id' do
   @found_workers = Worker.find_by_experience_fuzzy(params['query'])
+  @service_user = ServiceUser.find(params['id'])
   erb(:"workers/search_results")
 end
 
@@ -50,7 +53,19 @@ end
 post '/workers/:id' do
   worker = Worker.new(params)
   worker.update()
-  redirect to "/workers/#{worker.id}"
+  redirect to "/workers/#{worker.id()}"
+end
+
+# BOOK WORKER
+
+post '/workers/:worker_id/book_worker/:service_user_id' do
+  worker = Worker.find(params['worker_id'])
+  service_user = ServiceUser.find(params['service_user_id'])
+  Visit.new({
+    'service_user_id' => service_user.id(),
+    'worker_id' => worker.id()}
+  ).save()
+  redirect to "/service_users/#{service_user.id()}"
 end
 
 # DESTROY
