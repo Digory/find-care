@@ -1,6 +1,7 @@
 require_relative('../db/sql_runner.rb')
 require_relative('ServiceUser.rb')
 require_relative('Visit.rb')
+require('similar_text')
 
 class Worker
 
@@ -93,13 +94,36 @@ class Worker
     return returned_workers
   end
 
-  def self.find_by_experience(experience)
+  def self.find_by_experience_specific(experience)
     all_workers = self.all()
     returned_workers = []
     for worker in all_workers
-      returned_workers << worker if worker.experience.downcase.match?(experience.downcase)
+      returned_workers << worker if worker.experience.match?(experience)
     end
     return returned_workers
   end
+
+#  For searching using the search bar, where a user may type words with the incorrect spelling.
+
+  def self.find_by_experience_fuzzy(experience)
+    all_workers = self.all()
+    returned_workers = []
+    for worker in all_workers
+      returned_workers << worker if worker.experience_matches?(worker.experience(), experience)
+    end
+    return returned_workers
+  end
+
+#  Iterates through a worker's experience, then returns true if each word matches the searched word by at least 60%.
+
+  def experience_matches?(worker_experience, compared_experience)
+    worker_experience_string_array = worker_experience.split(",")
+    for string in worker_experience_string_array
+      return true if string.strip.downcase.similar(compared_experience.downcase) >= 60
+    end
+    return false
+  end
+
+
 
 end
