@@ -21,5 +21,8 @@ CREATE TABLE workers(
 CREATE TABLE visits(
   id SERIAL8 PRIMARY KEY,
   service_user_id INT8 REFERENCES service_users(id) ON DELETE CASCADE,
-  worker_id INT8 REFERENCES workers(id) ON DELETE CASCADE
+  worker_id INT8 REFERENCES workers(id) ON DELETE CASCADE,
+  visit_date DATE,
+  visit_time TIME,
+  duration DECIMAL(5,2)
 );

@@ -120,6 +120,7 @@ class Worker
 
   def self.find_by_experience_fuzzy(searched)
     all_workers = self.all()
+    return all_workers if searched.strip == ""
     returned_workers = []
     for worker in all_workers
       if worker.experience_matches?(worker.experience(), searched, 60) || worker.experience_matches?(worker.keywords(), searched, 80)

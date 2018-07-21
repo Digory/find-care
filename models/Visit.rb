@@ -4,24 +4,33 @@ require_relative('ServiceUser.rb')
 
 class Visit
 
-  attr_accessor :id, :service_user_id, :worker_id
+  attr_accessor :id, :service_user_id, :worker_id, :visit_date, :visit_time, :duration
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @service_user_id = options['service_user_id'].to_i
     @worker_id = options['worker_id'].to_i
+    @visit_date = options['visit_date']
+    @visit_time = options['visit_time']
+    @duration = options['duration'].to_f
+  end
+
+  def get_details()
+    worker = Worker.find(@worker_id)
+    worker_cost = worker.hourly_rate() * @duration
+    return "#{worker.name()} is coming on #{@visit_date} at #{@visit_time} for #{@duration} hours, at a cost of: £#{worker_cost}"
   end
 
   def save()
-    sql = "INSERT INTO visits(service_user_id, worker_id) VALUES($1, $2) RETURNING id"
-    values = [@service_user_id, @worker_id]
+    sql = "INSERT INTO visits(service_user_id, worker_id, visit_date, visit_time, duration) VALUES($1, $2, $3, $4, $5) RETURNING id"
+    values = [@service_user_id, @worker_id, @visit_date, @visit_time, @duration]
     result = SqlRunner.run(sql,values)
     @id = result.first['id'].to_i
   end
 
   def update()
-    sql = "UPDATE visits SET (service_user_id, worker_id) = ($1, $2) WHERE id = $3"
-    values = [@service_user_id, @worker_id, @id]
+    sql = "UPDATE visits SET (service_user_id, worker_id, visit_date, visit_time, duration) = ($1, $2, $3, $4, $5) WHERE id = $6"
+    values = [@service_user_id, @worker_id, @visit_date, @visit_time, @duration, @id]
     SqlRunner.run(sql, values)
   end
 

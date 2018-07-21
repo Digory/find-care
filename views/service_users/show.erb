@@ -12,3 +12,8 @@
   <input id="search-bar" name="query"type="text"/>
   <input type="submit" value="SEARCH">
 </form>
+
+<p>Visits booked:</p>
+<% for visit in @service_user.visits() %>
+  <p><%=visit.get_details()%></p>
+  <% end %>

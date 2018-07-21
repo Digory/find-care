@@ -52,18 +52,27 @@ worker_3.save()
 
 visit_1 = Visit.new({
   'service_user_id' => service_user_1.id,
-  'worker_id' => worker_1.id
+  'worker_id' => worker_1.id,
+  'visit_date' => '2018-08-01',
+  'visit_time' => '09:00:00',
+  'duration' => 2.5
   })
 visit_1.save()
 
 visit_2 = Visit.new({
   'service_user_id' => service_user_1.id,
-  'worker_id' => worker_1.id
+  'worker_id' => worker_1.id,
+  'visit_date' => '2018-08-06',
+  'visit_time' => '11:00:00',
+  'duration' => 4
   })
 visit_2.save()
 
 visit_3 = Visit.new({
   'service_user_id' => service_user_3.id,
-  'worker_id' => worker_2.id
+  'worker_id' => worker_2.id,
+  'visit_date' => '2018-09-30',
+  'visit_time' => '22:00:00',
+  'duration' => 2
   })
 visit_3.save()
