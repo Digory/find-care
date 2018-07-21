@@ -1,0 +1,9 @@
+<h2> What day would you like to book <%=@worker.name()%> for?</h2>
+
+<form action="/workers/<%=@worker.id()%>/confirm_booking/<%=@service_user.id()%>" method="POST">
+<input type="date" name="visit_date">
+<input type="time" name="visit_time">
+<label for="visit-duration">For how long?</label>
+<input id="visit-duration" type="number" name="visit_duration">
+<input type="submit" value="confirm date">
+</form>

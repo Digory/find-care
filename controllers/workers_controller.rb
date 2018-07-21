@@ -59,13 +59,24 @@ end
 # BOOK WORKER
 
 post '/workers/:worker_id/book_worker/:service_user_id' do
+  @worker = Worker.find(params['worker_id'])
+  @service_user = ServiceUser.find(params['service_user_id'])
+  erb(:"workers/book")
+end
+
+# CONFIRM BOOKING
+
+post '/workers/:worker_id/confirm_booking/:service_user_id' do
   worker = Worker.find(params['worker_id'])
   service_user = ServiceUser.find(params['service_user_id'])
   Visit.new({
     'service_user_id' => service_user.id(),
-    'worker_id' => worker.id()}
-  ).save()
-  redirect to "/service_users/#{service_user.id()}"
+    'worker_id' => worker.id(),
+    'visit_date' => params['visit_date'],
+    'visit_time' => params['visit_time'],
+    'duration' => params['visit_duration']
+    }).save()
+    redirect to "/service_users/#{service_user.id()}"
 end
 
 # DESTROY
