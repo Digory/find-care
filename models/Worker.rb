@@ -76,4 +76,30 @@ class Worker
     results = SqlRunner.run(sql, values)
     return results.map{|worker_info| Worker.new(worker_info)}
   end
+
+  def self.find_by_can_drive(can_drive)
+    sql = "SELECT * FROM workers WHERE can_drive = $1"
+    values = [can_drive]
+    results = SqlRunner.run(sql, values)
+    return results.map{|worker_info| Worker.new(worker_info)}
+  end
+
+  def self.find_by_hourly_rate(max_hourly_rate)
+    all_workers = self.all()
+    returned_workers = []
+    for worker in all_workers
+      returned_workers << worker if worker.hourly_rate <= max_hourly_rate
+    end
+    return returned_workers
+  end
+
+  def self.find_by_experience(experience)
+    all_workers = self.all()
+    returned_workers = []
+    for worker in all_workers
+      returned_workers << worker if worker.experience.downcase.match?(experience.downcase)
+    end
+    return returned_workers
+  end
+
 end

@@ -62,6 +62,47 @@ class WorkerTest < MiniTest::Test
     assert_equal(1, actual)
   end
 
+  def test_find_by_gender_m()
+    actual = Worker.find_by_gender('m').length()
+    assert_equal(2, actual)
+  end
+
+  def test_find_by_gender_f()
+    actual = Worker.find_by_gender('f').length()
+    assert_equal(1, actual)
+  end
+
+  def test_find_by_can_drive_true()
+    actual = Worker.find_by_can_drive(true).length()
+    assert_equal(2, actual)
+  end
+
+  def test_find_by_can_drive_false()
+    actual = Worker.find_by_can_drive(false).length()
+    assert_equal(1, actual)
+  end
+
+  def test_find_by_hourly_rate()
+    actual = Worker.find_by_hourly_rate(8.90).length()
+    assert_equal(1, actual)
+  end
+
+  def test_find_by_experience_full_word()
+    actual = Worker.find_by_experience('Autism').length()
+    assert_equal(2, actual)
+  end
+
+  def test_find_by_word_case_insensitive()
+    actual = Worker.find_by_experience('aUTIsm').length()
+    assert_equal(2, actual)
+  end
+
+  def test_find_by_experience_partial_word()
+    actual = Worker.find_by_experience('irst').length()
+    assert_equal(1, actual)
+  end
+
+
 
 
 end
