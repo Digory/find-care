@@ -14,7 +14,8 @@ CREATE TABLE workers(
   gender CHAR(1),
   can_drive BOOLEAN,
   hourly_rate DECIMAL(5,2),
-  experience TEXT
+  experience TEXT,
+  keywords TEXT
 );
 
 CREATE TABLE visits(

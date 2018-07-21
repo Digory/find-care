@@ -37,6 +37,14 @@ get '/workers/:id/edit/?' do
   erb(:"workers/edit")
 end
 
+
+# SEARCH
+
+post '/workers/search_results' do
+  @found_workers = Worker.find_by_experience_fuzzy(params['query'])
+  erb(:"workers/search_results")
+end
+
 # UPDATE
 
 post '/workers/:id' do

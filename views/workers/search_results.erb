@@ -1,0 +1,5 @@
+<h1>Results:</h1>
+
+<% for worker in @found_workers %>
+  <p><a href="/workers/<%=worker.id()%>"><%=worker.get_info()%></a></p>
+  <% end %>
