@@ -45,6 +45,16 @@ class ServiceUser
     return results.map{|visit_info| Visit.new(visit_info)}
   end
 
+  def reduce_weekly_budget?(amount)
+    if @weekly_budget - amount < 0
+      return false
+    else
+      @weekly_budget -= amount
+      update()
+      return true
+    end
+  end
+
   def self.all()
     sql = "SELECT * FROM service_users"
     results = SqlRunner.run(sql)
@@ -62,4 +72,5 @@ class ServiceUser
     sql = "DELETE FROM service_users"
     SqlRunner.run(sql)
   end
+
 end

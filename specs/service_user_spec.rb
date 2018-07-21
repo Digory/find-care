@@ -42,21 +42,33 @@ class ServiceUserTest < MiniTest::Test
   end
 
   def test_update()
-    @seeds.service_user_1.weekly_budget = 890
+    @seeds.service_user_1.weekly_budget = 400
     @seeds.service_user_1.update()
-    service_user_test = ServiceUser.find(@seeds.service_user_1.id)
+    service_user_test = ServiceUser.find(@seeds.service_user_1.id())
     actual = service_user_test.weekly_budget()
-    assert_equal(890, actual)
+    assert_equal(400, actual)
   end
 
-  def test_workers_returns_array_of_correct_size()
+  def test_workers__returns_array_of_correct_size()
     actual = @seeds.service_user_1.workers().length()
     assert_equal(1, actual)
   end
 
-  def test_visits_returns_array_of_correct_size()
+  def test_visits__returns_array_of_correct_size()
     actual = @seeds.service_user_1.visits().length()
     assert_equal(2, actual)
+  end
+
+  def test_reduce_weekly_budget__reduces_budget()
+    @seeds.service_user_1.reduce_weekly_budget?(100)
+    service_user_test = ServiceUser.find(@seeds.service_user_1.id())
+    actual = service_user_test.weekly_budget()
+    assert_equal(700, actual)
+  end
+
+  def test_reduce_weekly_budget__returns_false()
+    actual = @seeds.service_user_1.reduce_weekly_budget?(900)
+    assert_equal(false, actual)
   end
 
 

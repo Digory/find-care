@@ -25,9 +25,16 @@ end
 
 # SHOW
 
-get '/service_users/:id/?' do
+get '/service_users/:id' do
   @service_user = ServiceUser.find(params['id'])
   erb(:"service_users/show")
+end
+
+# FAILED BOOKING
+
+get '/service_users/:id/failed' do
+  @service_user_id = params['id']
+  erb(:"service_users/failed")
 end
 
 # EDIT

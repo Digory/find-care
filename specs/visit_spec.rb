@@ -17,7 +17,10 @@ class VisitTest < MiniTest::Test
   def test_save()
     visit_4 = Visit.new({
       'service_user_id' => @seeds.service_user_1.id(),
-      'worker_id' => @seeds.worker_1.id()
+      'worker_id' => @seeds.worker_1.id(),
+      'visit_date' => '2018-09-23',
+      'visit_time' => '10:00:00',
+      'duration' => 4
       })
     visit_4.save()
     actual = Visit.all().length()
