@@ -39,10 +39,18 @@ get '/workers/:id/edit/?' do
   erb(:"workers/edit")
 end
 
-# SEARCH
+# FUZZY SEARCH
 
-post '/workers/search_results/:id' do
+post '/workers/search_results/:id/fuzzy_search' do
   @found_workers = Worker.find_by_experience_fuzzy(params['query'])
+  @service_user = ServiceUser.find(params['id'])
+  erb(:"workers/search_results")
+end
+
+# SPECIFIC SEARCH
+
+post '/workers/search_results/:id/specific' do
+  @found_workers = Worker.find_by_experience_all_types(params['gender'],"t", 12, "Autism")
   @service_user = ServiceUser.find(params['id'])
   erb(:"workers/search_results")
 end

@@ -7,10 +7,22 @@
   <input type="submit" value="DELETE">
 </form>
 
-<form action="/workers/search_results/<%=@service_user.id()%>" method="POST">
+<form action="/workers/search_results/<%=@service_user.id()%>/fuzzy_search" method="POST">
   <label for="search-bar">Search:</label>
   <input id="search-bar" name="query"type="text"/>
   <input type="submit" value="SEARCH">
+</form>
+
+<form action="/workers/search_results/<%=@service_user.id()%>/specific" method="POST">
+
+  <input type="radio" name="gender" value="m">Male<br>
+  <input type="radio" name="gender" value="f">Female<br>
+  <input type="radio" name="gender" value="a">any<br>
+
+  <!-- <input type="radio" name="can-drive" value=true>CAN drive<br>
+  <input type="radio" name="can-drive" value=false>CANNOT drive<br> -->
+
+  <input type="submit" value="SEARCH FOR THESE CRITERIA">
 </form>
 
 <p>Next visit:</p>

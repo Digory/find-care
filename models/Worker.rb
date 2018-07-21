@@ -85,15 +85,15 @@ class Worker
   end
 
   def self.find_by_gender(gender)
+    return self.all() if gender == "a"
     sql = "SELECT * FROM workers WHERE gender = $1"
     values = [gender]
     results = SqlRunner.run(sql, values)
     return results.map{|worker_info| Worker.new(worker_info)}
   end
 
-  def self.find_by_can_drive(can_drive)
-    sql = "SELECT * FROM workers WHERE can_drive = $1"
-    values = [can_drive]
+  def self.find_by_can_drive()
+    sql = "SELECT * FROM workers WHERE can_drive = TRUE"
     results = SqlRunner.run(sql, values)
     return results.map{|worker_info| Worker.new(worker_info)}
   end
@@ -112,6 +112,22 @@ class Worker
     returned_workers = []
     for worker in all_workers
       returned_workers << worker if worker.experience.match?(experience)
+    end
+    return returned_workers
+  end
+
+  def self.find_by_experience_all_types(gender, can_drive, max_hourly_rate, experience = "any")
+    returned_workers = []
+    for worker in self.all()
+      if worker.gender() == gender || gender == "a"
+        if worker.can_drive() == can_drive
+          if worker.hourly_rate() <= max_hourly_rate
+            if worker.experience_matches?(worker.experience(), experience, 100) || experience == "any"
+              returned_workers << worker
+            end
+          end
+        end
+      end
     end
     return returned_workers
   end
