@@ -43,6 +43,7 @@ end
 
 post '/workers/search_results/:id/fuzzy_search' do
   @found_workers = Worker.find_by_experience_fuzzy(params['query'])
+  @found_workers = Worker.sort_by_cost(@found_workers)
   @service_user = ServiceUser.find(params['id'])
   erb(:"workers/search_results")
 end
@@ -51,6 +52,7 @@ end
 
 post '/workers/search_results/:id/specific' do
   @found_workers = Worker.find_by_experience_all_types(params['gender'],params['can-drive'], params['max-hourly'], params['experience'])
+  @found_workers = Worker.sort_by_cost(@found_workers)  
   @service_user = ServiceUser.find(params['id'])
   erb(:"workers/search_results")
 end

@@ -91,9 +91,13 @@ class Worker
     SqlRunner.run(sql)
   end
 
+  def self.sort_by_cost(workers)
+    return workers.sort_by{|worker| worker.hourly_rate()}
+  end
+
+  # For searching using filters.
 
   def self.find_by_experience_all_types(gender, can_drive, max_hourly_rate, experience)
-    p experience
     found_workers = []
     for worker in self.all()
       if worker.gender() == gender || gender == "a"

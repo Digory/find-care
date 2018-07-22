@@ -62,6 +62,12 @@ class WorkerTest < MiniTest::Test
     assert_equal(1, actual)
   end
 
+  def test_sort_by_cost()
+    sorted_workers = Worker.sort_by_cost(Worker.all())
+    actual = sorted_workers[0].id()
+    assert_equal(@seeds.worker_4.id(), actual)
+  end
+
   def test_find_by_experience_all_types__any_gender_any_experience()
     actual = Worker.find_by_experience_all_types("a", "a", 100, "any").length()
     assert_equal(6, actual)
