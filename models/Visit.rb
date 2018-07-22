@@ -1,6 +1,7 @@
 require_relative('../db/sql_runner.rb')
 require_relative('Worker.rb')
 require_relative('ServiceUser.rb')
+require_relative('CheckDate.rb')
 
 class Visit
 
@@ -74,6 +75,14 @@ class Visit
     return ServiceUser.new(result.first)
   end
 
+  def self.get_date_from_checkdate_string(date_and_time_string)
+    return date_and_time_string[0..9]
+  end
+
+  def self.get_time_from_checkdate_string(date_and_time_string)
+    return date_and_time_string[11..18]
+  end
+
   def self.all()
     sql = "SELECT * FROM visits"
     results = SqlRunner.run(sql)
@@ -90,5 +99,29 @@ class Visit
   def self.delete_all()
     sql = "DELETE FROM visits"
     SqlRunner.run(sql)
+  end
+
+  def self.create_with_these_parameters?(service_user_id, worker_id, visit_days, visit_time, duration)
+    service_user = ServiceUser.find(service_user_id)
+    worker_hourly_cost = Worker.find(worker_id).cost_to_employer().to_f
+    total_hours = visit_days.size() * duration.to_f
+    total_cost = worker_hourly_cost * total_hours
+
+    if service_user.reduce_weekly_budget?(total_cost)
+      for day in visit_days
+        date = self.get_date_from_checkdate_string(CheckDate.find_next_day_of_the_week(day, visit_time).to_s)
+        time = self.get_time_from_checkdate_string(CheckDate.find_next_day_of_the_week(day, visit_time).to_s)
+        visit = Visit.new({
+          'service_user_id' => service_user_id,
+          'worker_id' => worker_id,
+          'visit_date' => date,
+          'visit_time' => time,
+          'duration' => duration})
+        visit.save()
+      end
+      return true
+    else
+      return false
+    end
   end
 end

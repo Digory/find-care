@@ -1,9 +1,19 @@
-<h2> What day would you like to book <%=@worker.name()%> for?</h2>
+<h2> What days would you like to book <%=@worker.name()%> for?</h2>
 
 <form action="/workers/<%=@worker.id()%>/confirm_booking/<%=@service_user.id()%>" method="POST">
-<input type="date" name="visit_date">
-<input type="time" name="visit_time">
-<label for="visit-duration">For how long?</label>
-<input id="visit-duration" type="number" name="visit_duration">
+  <h3>Days of the week<h3>
+<input type="checkbox" name="visit_days[]" value="Monday">Monday<br>
+<input type="checkbox" name="visit_days[]" value="Tuesday">Tuesday<br>
+<input type="checkbox" name="visit_days[]" value="Wednesday">Wednesday<br>
+<input type="checkbox" name="visit_days[]" value="Thursday">Thursday<br>
+<input type="checkbox" name="visit_days[]" value="Friday">Friday<br>
+<input type="checkbox" name="visit_days[]" value="Saturday">Saturday<br>
+<input type="checkbox" name="visit_days[]" value="Sunday">Sunday<br>
+<h3>Time of day</h3>
+<input type="text" name="visit_time">
+
+<h3>For how many hours?</h3>
+<input type="number" name="duration">
 <input type="submit" value="confirm date">
+
 </form>

@@ -44,9 +44,8 @@ class ServiceUserTest < MiniTest::Test
   def test_update()
     @seeds.service_user_1.weekly_budget = 400
     @seeds.service_user_1.update()
-    service_user_test = ServiceUser.find(@seeds.service_user_1.id())
-    actual = service_user_test.weekly_budget()
-    assert_equal(400, actual)
+    actual = @seeds.service_user_1.get_budget_from_database().to_f
+    assert_equal(400.00, actual)
   end
 
   def test_workers__returns_array_of_correct_size()

@@ -52,7 +52,7 @@ end
 
 post '/workers/search_results/:id/specific' do
   @found_workers = Worker.find_by_experience_all_types(params['gender'],params['can-drive'], params['max-hourly'], params['experience'])
-  @found_workers = Worker.sort_by_cost(@found_workers)  
+  @found_workers = Worker.sort_by_cost(@found_workers)
   @service_user = ServiceUser.find(params['id'])
   erb(:"workers/search_results")
 end
@@ -78,18 +78,13 @@ end
 post '/workers/:worker_id/confirm_booking/:service_user_id' do
   worker = Worker.find(params['worker_id'])
   service_user = ServiceUser.find(params['service_user_id'])
-  if service_user.reduce_weekly_budget?(worker.hourly_rate() * params['visit_duration'].to_f)
-    visit = Visit.new({
-      'service_user_id' => service_user.id(),
-      'worker_id' => worker.id(),
-      'visit_date' => params['visit_date'],
-      'visit_time' => params['visit_time'],
-      'duration' => params['visit_duration']
-      })
-      visit.save()
-      redirect to "/service_users/#{service_user.id()}"
+
+  # If a service user cannot afford the visit they are told this, and the visit is not created.
+
+  if Visit.create_with_these_parameters?(service_user.id(), worker.id(), params['visit_days'],           params['visit_time'], params['duration'])
+     redirect to "/service_users/#{service_user.id()}"
     else
-      redirect to "/service_users/#{service_user.id()}/failed"
+     redirect to "/service_users/#{service_user.id()}/failed"
     end
 end
 

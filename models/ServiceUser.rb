@@ -46,6 +46,7 @@ class ServiceUser
   end
 
   def reduce_weekly_budget?(amount)
+    # remaining_budget = get_budget_from_database().to_f
     if @weekly_budget - amount < 0
       return false
     else
@@ -54,6 +55,13 @@ class ServiceUser
       return true
     end
   end
+
+  # def get_budget_from_database()
+  #   sql = "SELECT weekly_budget FROM service_users WHERE id = $1"
+  #   values = [@id]
+  #   result = SqlRunner.run(sql, values)
+  #   return result.first['weekly_budget']
+  # end
 
   def self.all()
     sql = "SELECT * FROM service_users"

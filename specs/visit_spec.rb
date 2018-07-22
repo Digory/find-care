@@ -2,6 +2,7 @@ require('minitest/autorun')
 require('minitest/rg')
 require_relative('../db/seeds_for_testing.rb')
 require_relative('../models/Visit.rb')
+require_relative('../models/ServiceUser.rb')
 
 class VisitTest < MiniTest::Test
 
@@ -66,6 +67,23 @@ class VisitTest < MiniTest::Test
     @seeds.visit_1.increase_date_by_a_week()
     actual = @seeds.visit_1.get_database_visit_date()
     assert_equal('2018-06-08', actual)
+  end
+
+  def test_create_with_these_parameters__time_in_expected_format()
+    actual = Visit.create_with_these_parameters?(@seeds.service_user_1.id(), @seeds.worker_1.id(), ["monday", "wednesday"], "11:00:00", 2)
+    assert_equal(true, actual)
+  end
+
+  def test_create_with_these_parameters__time_in_unexpected_format()
+    actual = Visit.create_with_these_parameters?(@seeds.service_user_1.id(), @seeds.worker_1.id(), ["monday", "wednesday"], "11 am", 2)
+    assert_equal(true, actual)
+  end
+
+  def test_create_with_these_parameters__returns_false_if_cost_too_high()
+    @seeds.service_user_1.weekly_budget = 5
+    @seeds.service_user_1.update()
+    actual = Visit.create_with_these_parameters?(@seeds.service_user_1.id(), @seeds.worker_1.id(), ["monday", "wednesday"], "11 am", 2)
+    assert_equal(false, actual)
   end
 
 

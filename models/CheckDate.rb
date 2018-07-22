@@ -1,4 +1,5 @@
 require('date')
+require('chronic')
 
 class CheckDate
 
@@ -7,6 +8,8 @@ class CheckDate
     return DateTime.now > checked_date
   end
 
-end
+  def self.find_next_day_of_the_week(day_of_the_week, time)
+    return Chronic.parse("next #{day_of_the_week} at #{time}")
+  end
 
-p CheckDate.is_in_past?("2002-01-01", "02:12")
+end
