@@ -56,6 +56,15 @@ class ServiceUser
     end
   end
 
+  def dynamically_update_budget()
+    total_cost_of_all_visits = 0
+    for visit in visits()
+      total_cost_of_all_visits += visit.get_cost()
+    end
+    @weekly_budget -= total_cost_of_all_visits
+    update()
+  end
+
   # def get_budget_from_database()
   #   sql = "SELECT weekly_budget FROM service_users WHERE id = $1"
   #   values = [@id]

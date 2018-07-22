@@ -16,10 +16,19 @@ class Visit
     @duration = options['duration'].to_f
   end
 
-  def get_details()
+  def get_cost()
     worker = Worker.find(@worker_id)
-    worker_cost = worker.hourly_rate() * @duration
+    return worker.cost_to_employer().to_f * @duration
+  end
+
+  def get_details_for_service_user()
+    worker_cost = get_cost()
     return "#{worker.name()} is coming on #{@visit_date} at #{@visit_time} for #{@duration} hours, at a cost of: £#{worker_cost}"
+  end
+
+  def get_details_for_worker()
+    service_user = ServiceUser.find(@service_user_id)
+    return "You are supporting #{service_user.name()} on #{@visit_date} at #{@visit_time} for #{@duration} hours."
   end
 
   def get_database_visit_date()

@@ -25,12 +25,21 @@ post '/workers' do
   redirect to "/workers"
 end
 
-# SHOW
+# SHOW TO WORKER
 
 get '/workers/:id' do
   @worker = Worker.find(params['id'])
-  erb(:"workers/show")
+  erb(:"workers/show_to_worker")
 end
+
+# SHOW TO SERVICE USER
+
+get '/workers/:worker_id/view_profile/:service_user_id' do
+  @worker = Worker.find(params['worker_id'])
+  @service_user = ServiceUser.find(params['service_user_id'])
+  erb(:"workers/show_to_service_user")
+end
+
 
 # EDIT
 

@@ -1,9 +1,0 @@
-<h1>Worker detailed info:</h1>
-
-<h2><%=@worker.get_info()%></h2>
-
-<a href="/workers/<%=@worker.id()%>/edit">EDIT</a>
-
-<form method="POST" action="/workers/<%=@worker.id%>/delete">
-  <input type="submit" value="DELETE"/>
-</form>

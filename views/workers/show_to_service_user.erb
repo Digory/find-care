@@ -1,0 +1,7 @@
+<h1>Profile for: <%=@worker.name()%></h1>
+
+<p><%=@worker.get_info()%><p>
+
+  <form action="/workers/<%=@worker.id()%>/book_worker/<%=@service_user.id()%>" method="POST">
+    <input type="submit" value="BOOK <%=@worker.name()%>">
+  </form>

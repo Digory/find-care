@@ -41,10 +41,15 @@
   <input type="submit" value="SEARCH FOR THESE CRITERIA">
 </form>
 
-<p>Next visit:</p>
+<p>Next visits:</p>
 <% for visit in @service_user.visits() %>
 <% while CheckDate.is_in_past?(visit.get_database_visit_date(), visit.get_database_visit_time()) %>
 <% visit.increase_date_by_a_week() %>
 <% end %>
-  <p><%=visit.get_details()%></p>
+  <p><%=visit.get_details_for_service_user()%></p>
+  <% end %>
+
+<p>Your workers:</p>
+<% for worker in @service_user.workers() %>
+  <a href="/workers/<%=worker.id()%>/view_profile/<%=@service_user.id()%>"><%=worker.name()%></a>
   <% end %>

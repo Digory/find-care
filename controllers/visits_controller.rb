@@ -50,6 +50,8 @@ end
 
 post '/visits/:id/delete' do
   visit = Visit.find(params['id'])
+  service_user = ServiceUser.find(visit.service_user_id())
   visit.delete()
+  service_user.dynamically_update_budget()
   redirect to "/visits"
 end
