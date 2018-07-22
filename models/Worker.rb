@@ -78,6 +78,14 @@ class Worker
     return results.map{|visit_info| Visit.new(visit_info)}
   end
 
+  # When a worker is deleted, any service users they were linked to have to have their budget increased back to what it was.
+
+  def fix_service_users_budgets()
+    for visit in visits()
+       ServiceUser.find(visit.service_user_id).increase_budget(visit.id())
+    end
+  end
+
   def self.all()
     sql = "SELECT * FROM workers"
     results = SqlRunner.run(sql)

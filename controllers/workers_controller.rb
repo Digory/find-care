@@ -101,6 +101,7 @@ end
 
 post '/workers/:id/delete' do
   worker = Worker.find(params['id'])
+  worker.fix_service_users_budgets()
   worker.delete()
   redirect to "/workers"
 end
