@@ -1,0 +1,12 @@
+<h1>Welcome to the admin page</h1>
+
+<%for worker in @workers %>
+<%=worker.name() + worker.approved().to_s%>
+<% if !worker.approved() %>
+<form method="POST" action="/workers/approve/<%=worker.id()%>">
+<input type="submit" value="Approve worker">
+</form>
+
+<% end %>
+
+<%end%>

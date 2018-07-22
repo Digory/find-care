@@ -5,7 +5,7 @@ require('similar_text')
 
 class Worker
 
-  attr_accessor :id, :name, :gender, :can_drive, :hourly_rate, :experience, :visits_awaiting_approval, :keywords
+  attr_accessor :id, :name, :gender, :can_drive, :hourly_rate, :experience, :approved, :keywords
 
   $cost_multiplier = 1.2
 
@@ -17,6 +17,7 @@ class Worker
     @hourly_rate = options['hourly_rate'].to_f
     @experience = options['experience']
 
+    @approved = false
     # @visits_awaiting_approval = []
     @keywords = options['keywords']?  options['keywords'] : ""
     create_keywords_string() unless options['keywords']
@@ -41,20 +42,32 @@ class Worker
     return "#{@name}, gender: #{@gender}, can drive: #{@can_drive}, hourly rate: £#{sprintf('%.2f', @hourly_rate)}, experience: #{@experience}"
   end
 
+  def approve()
+    @approved = true
+    update()
+  end
+
+  def check_database_for_approved()
+    sql = "SELECT approved FROM workers WHERE id = $1"
+    values = [@id]
+    result = SqlRunner.run(sql, values)
+    return result.first['approved']
+  end
+
   def cost_to_employer()
     return sprintf('%.2f', @hourly_rate * $cost_multiplier)
   end
 
   def save()
-    sql = "INSERT INTO workers(name, gender, can_drive, hourly_rate, experience, keywords) VALUES($1, $2, $3, $4, $5, $6) RETURNING id"
-    values = [@name, @gender, @can_drive, @hourly_rate, @experience, @keywords]
+    sql = "INSERT INTO workers(name, gender, can_drive, hourly_rate, experience, keywords, approved) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id"
+    values = [@name, @gender, @can_drive, @hourly_rate, @experience, @keywords, @approved]
     result = SqlRunner.run(sql,values)
     @id = result.first['id'].to_i
   end
 
   def update()
-    sql = "UPDATE workers SET (name, gender, can_drive, hourly_rate, experience, keywords) = ($1, $2, $3, $4, $5, $6) WHERE id = $7"
-    values = [@name, @gender, @can_drive, @hourly_rate, @experience, @keywords, @id]
+    sql = "UPDATE workers SET (name, gender, can_drive, hourly_rate, experience, keywords, approved) = ($1, $2, $3, $4, $5, $6, $7) WHERE id = $8"
+    values = [@name, @gender, @can_drive, @hourly_rate, @experience, @keywords, @approved, @id]
     SqlRunner.run(sql, values)
   end
 

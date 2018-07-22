@@ -14,7 +14,7 @@ end
 
 # NEW
 
-get '/workers/new/?' do
+get '/workers/new' do
   erb(:"workers/new")
 end
 
@@ -22,6 +22,13 @@ end
 
 post '/workers' do
   Worker.new(params).save()
+  redirect to "/"
+end
+
+# APPROVE
+
+post '/workers/approve/:id' do
+  Worker.find(params['id']).approve()
   redirect to "/workers"
 end
 

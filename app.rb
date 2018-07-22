@@ -11,3 +11,10 @@ require_relative('controllers/visits_controller.rb')
 get '/' do
   erb(:index)
 end
+
+# ADMIN
+
+get '/admin' do
+  @workers = Worker.all()
+  erb(:admin)
+end

@@ -15,7 +15,8 @@ CREATE TABLE workers(
   can_drive BOOLEAN,
   hourly_rate DECIMAL(5,2),
   experience TEXT,
-  keywords TEXT
+  keywords TEXT,
+  approved BOOLEAN
 );
 
 CREATE TABLE visits(
