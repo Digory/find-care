@@ -10,6 +10,7 @@ class ServiceUser
     @id = options['id'].to_i if options['id']
     @name = options['name']
     @weekly_budget = options['weekly_budget'].to_f
+    @reset_to_this = @weekly_budget
   end
 
   def save()
@@ -49,12 +50,15 @@ class ServiceUser
     return @weekly_budget - amount > 0
   end
 
-  def dynamically_update_budget()
-    total_cost_of_all_visits = 0
-    for visit in visits()
-      total_cost_of_all_visits += visit.get_cost() if visit.check_database_for_approved()
-    end
-    @weekly_budget -= total_cost_of_all_visits
+  def reduce_budget(visit_id)
+    visit = Visit.find(visit_id)
+    @weekly_budget -= visit.get_cost()
+    update()
+  end
+
+  def increase_budget(visit_id)
+    visit = Visit.find(visit_id)
+    @weekly_budget += visit.get_cost()
     update()
   end
 

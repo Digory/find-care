@@ -17,7 +17,7 @@ class Worker
     @hourly_rate = options['hourly_rate'].to_f
     @experience = options['experience']
 
-    @visits_awaiting_approval = []
+    # @visits_awaiting_approval = []
     @keywords = options['keywords']?  options['keywords'] : ""
     create_keywords_string() unless options['keywords']
   end
@@ -33,9 +33,9 @@ class Worker
     @keywords << "cheap, low cost," if @hourly_rate <= 8.75
   end
 
-  def add_visit_awaiting_approval(visit)
-    @visits_awaiting_approval << visit
-  end
+  # def add_visit_awaiting_approval(visit)
+  #   @visits_awaiting_approval << visit
+  # end
 
   def get_info()
     return "#{@name}, gender: #{@gender}, can drive: #{@can_drive}, hourly rate: £#{sprintf('%.2f', @hourly_rate)}, experience: #{@experience}"

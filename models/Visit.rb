@@ -26,7 +26,6 @@ class Visit
     service_user = ServiceUser.find(@service_user_id)
     @approved = true
     update()
-    service_user.dynamically_update_budget()
   end
 
   def check_database_for_approved()
@@ -142,6 +141,7 @@ class Visit
           'visit_time' => time,
           'duration' => duration})
         visit.save()
+        service_user.reduce_budget(visit.id)
       end
       return true
     else

@@ -15,9 +15,12 @@
 <% end %>
   <p><%=visit.get_details_for_worker()%></p>
   <% if visit.check_database_for_approved() == "f" %>
-  <%= "this visit hasn't been approved yet!" %>
+  <%= "can you do this visit?" %>
     <form method="POST" action="/visits/<%=@worker.id%>/approve_visit/<%=visit.id()%>">
-      <input type="submit" value="APPROVE VISIT"/>
+      <input type="submit" value="YES"/>
+    </form>
+    <form method="POST" action="/visits/<%=visit.id()%>/delete">
+      <input type="submit" value="NO"/>
     </form>
     <% end %>
   <% end %>
