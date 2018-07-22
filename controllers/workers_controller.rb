@@ -50,7 +50,7 @@ end
 # SPECIFIC SEARCH
 
 post '/workers/search_results/:id/specific' do
-  @found_workers = Worker.find_by_experience_all_types(params['gender'],"t", 12, "Autism")
+  @found_workers = Worker.find_by_experience_all_types(params['gender'],params['can-drive'], params['max-hourly'], params['experience'])
   @service_user = ServiceUser.find(params['id'])
   erb(:"workers/search_results")
 end

@@ -2,7 +2,7 @@
 
 <% for worker in @found_workers %>
 <form action="/workers/<%=worker.id()%>/book_worker/<%=@service_user.id()%>" method="POST">
-  <input type="submit" value="<%=worker.get_info()%>">
+  <input type="submit" value="<%=worker.get_info()%> - cost to you £<%=worker.cost_to_employer()%>">
   <!-- <p><a href="/workers/<%=worker.id()%>/book_worker"><%=worker.get_info()%></a></p> -->
 </form>
   <% end %>

@@ -11,26 +11,26 @@ class WorkerTest < MiniTest::Test
 
   def test_all_returns_array_of_correct_size()
     actual = Worker.all().length()
-    assert_equal(3, actual)
+    assert_equal(6, actual)
   end
 
   def test_save()
-    worker_4 = Worker.new({
+    worker_7 = Worker.new({
       'name' => 'Elizabeth S.',
       'gender' => 'f',
       'can_drive' => true,
       'hourly_rate' => 14.50,
       'experience' => 'Epilepsy, Peg Feeds'
       })
-    worker_4.save()
+    worker_7.save()
     actual = Worker.all().length()
-    assert_equal(4, actual)
+    assert_equal(7, actual)
   end
 
   def test_delete()
     @seeds.worker_1.delete()
     actual = Worker.all().length()
-    assert_equal(2, actual)
+    assert_equal(5, actual)
   end
 
   def test_delete_all()
@@ -62,54 +62,49 @@ class WorkerTest < MiniTest::Test
     assert_equal(1, actual)
   end
 
-  def test_find_by_gender__m()
-    actual = Worker.find_by_gender('m').length()
+  def test_find_by_experience_all_types__any_gender_any_experience()
+    actual = Worker.find_by_experience_all_types("a", "a", 100, "any").length()
+    assert_equal(6, actual)
+  end
+
+  def test_find_by_experience_all_types__male_any_experience()
+    actual = Worker.find_by_experience_all_types("m", "a", 100, "any").length()
+    assert_equal(3, actual)
+  end
+
+  def test_find_by_experience_all_types__female_any_experience()
+    actual = Worker.find_by_experience_all_types("f", "a", 100, "any").length()
+    assert_equal(3, actual)
+  end
+
+  def test_find_by_experience_all_types__male_driver_any_experience()
+    actual = Worker.find_by_experience_all_types("m", "t", 100, "any").length()
     assert_equal(2, actual)
   end
 
-  def test_find_by_gender__f()
-    actual = Worker.find_by_gender('f').length()
+  def test_find_by_experience_all_types__female_driver_hourly_rate_11_any_experience()
+    actual = Worker.find_by_experience_all_types("f", "t", 11, "any").length()
     assert_equal(1, actual)
   end
 
-  def test_find_by_can_drive__true()
-    actual = Worker.find_by_can_drive(true).length()
-    assert_equal(2, actual)
-  end
-
-  def test_find_by_can_drive__false()
-    actual = Worker.find_by_can_drive(false).length()
-    assert_equal(1, actual)
-  end
-
-  def test_find_by_hourly_rate()
-    actual = Worker.find_by_hourly_rate(8.90).length()
-    assert_equal(1, actual)
-  end
-
-  def test_find_by_experience_specific__single_word()
-    actual = Worker.find_by_experience_specific('Autism').length()
-    assert_equal(2, actual)
-  end
-
-  def test_find_by_experience_specific__multiple_words()
-    actual = Worker.find_by_experience_specific('Autism, Children').length()
+  def test_find_by_experience_all_types__male_driver_hourly_rate_12_autism_experience()
+    actual = Worker.find_by_experience_all_types("m", "t", 13, "autism").length()
     assert_equal(1, actual)
   end
 
   def test_find_by_experience_fuzzy__partial_word()
     actual = Worker.find_by_experience_fuzzy('irst').length()
-    assert_equal(1, actual)
+    assert_equal(2, actual)
   end
 
   def test_find_by_experience_fuzzy__multiple_words()
     actual = Worker.find_by_experience_fuzzy('irst aid').length()
-    assert_equal(1, actual)
+    assert_equal(2, actual)
   end
 
   def test_find_by_experience_fuzzy__case_insensitive()
     actual = Worker.find_by_experience_fuzzy('aUTIsm').length()
-    assert_equal(2, actual)
+    assert_equal(3, actual)
   end
 
   def test_find_by_experience_fuzzy__letters_wrong()
@@ -129,22 +124,22 @@ class WorkerTest < MiniTest::Test
 
   def test_find_by_experience_fuzzy__keywords_correct_word()
     actual = Worker.find_by_experience_fuzzy('driver').length()
-    assert_equal(2, actual)
+    assert_equal(4, actual)
   end
 
   def test_find_by_experience_fuzzy__keywords_word_spelling_wrong()
     actual = Worker.find_by_experience_fuzzy('chep').length()
-    assert_equal(1, actual)
+    assert_equal(2, actual)
   end
 
   def test_find_by_experience_fuzzy__keywords_gender_spelling_wrong_1()
     actual = Worker.find_by_experience_fuzzy('mans').length()
-    assert_equal(2, actual)
+    assert_equal(3, actual)
   end
 
   def test_find_by_experience_fuzzy__keywords_gender_spelling_wrong_2()
     actual = Worker.find_by_experience_fuzzy('wimen').length()
-    assert_equal(1, actual)
+    assert_equal(3, actual)
   end
 
 

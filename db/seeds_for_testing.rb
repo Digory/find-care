@@ -5,7 +5,7 @@ require_relative('../models/Visit.rb')
 class SeedsForTesting
 
   attr_accessor :service_user_1, :service_user_2, :service_user_3,
-              :worker_1, :worker_2, :worker_3,
+              :worker_1, :worker_2, :worker_3, :worker_4, :worker_5, :worker_6,
               :visit_1, :visit_2, :visit_3
 
   def initialize()
@@ -57,6 +57,33 @@ class SeedsForTesting
       'experience' => 'Moving and Handling'
       })
     @worker_3.save()
+
+    @worker_4 = Worker.new({
+      'name' => 'Jenna F.',
+      'gender' => 'f',
+      'can_drive' => true,
+      'hourly_rate' => 8.50,
+      'experience' => 'Children, Moving and Handling, Peg Feeding'
+      })
+    @worker_4.save()
+
+    @worker_5 = Worker.new({
+      'name' => 'Bill N.',
+      'gender' => 'm',
+      'can_drive' => false,
+      'hourly_rate' => 9.00,
+      'experience' => ''
+      })
+    @worker_5.save()
+
+    @worker_6 = Worker.new({
+      'name' => 'Jillian M.',
+      'gender' => 'f',
+      'can_drive' => true,
+      'hourly_rate' => 11.30,
+      'experience' => 'Autism, Food Hygiene, First Aid'
+      })
+    @worker_6.save()
 
     @visit_1 = Visit.new({
       'service_user_id' => service_user_1.id,

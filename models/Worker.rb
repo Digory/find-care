@@ -7,6 +7,8 @@ class Worker
 
   attr_accessor :id, :name, :gender, :can_drive, :hourly_rate, :experience, :keywords
 
+  $cost_multiplier = 1.2
+
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @name = options['name']
@@ -14,6 +16,7 @@ class Worker
     @can_drive = options['can_drive']
     @hourly_rate = options['hourly_rate'].to_f
     @experience = options['experience']
+
     @keywords = options['keywords']?  options['keywords'] : ""
     create_keywords_string() unless options['keywords']
   end
@@ -30,7 +33,11 @@ class Worker
   end
 
   def get_info()
-    return "#{@name}, gender: #{@gender}, can drive: #{@can_drive}, hourly rate: #{@hourly_rate}, experience: #{@experience}"
+    return "#{@name}, gender: #{@gender}, can drive: #{@can_drive}, hourly rate: £#{sprintf('%.2f', @hourly_rate)}, experience: #{@experience}"
+  end
+
+  def cost_to_employer()
+    return sprintf('%.2f', @hourly_rate * $cost_multiplier)
   end
 
   def save()
@@ -84,52 +91,22 @@ class Worker
     SqlRunner.run(sql)
   end
 
-  def self.find_by_gender(gender)
-    return self.all() if gender == "a"
-    sql = "SELECT * FROM workers WHERE gender = $1"
-    values = [gender]
-    results = SqlRunner.run(sql, values)
-    return results.map{|worker_info| Worker.new(worker_info)}
-  end
 
-  def self.find_by_can_drive()
-    sql = "SELECT * FROM workers WHERE can_drive = TRUE"
-    results = SqlRunner.run(sql, values)
-    return results.map{|worker_info| Worker.new(worker_info)}
-  end
-
-  def self.find_by_hourly_rate(max_hourly_rate)
-    all_workers = self.all()
-    returned_workers = []
-    for worker in all_workers
-      returned_workers << worker if worker.hourly_rate <= max_hourly_rate
-    end
-    return returned_workers
-  end
-
-  def self.find_by_experience_specific(experience)
-    all_workers = self.all()
-    returned_workers = []
-    for worker in all_workers
-      returned_workers << worker if worker.experience.match?(experience)
-    end
-    return returned_workers
-  end
-
-  def self.find_by_experience_all_types(gender, can_drive, max_hourly_rate, experience = "any")
-    returned_workers = []
+  def self.find_by_experience_all_types(gender, can_drive, max_hourly_rate, experience)
+    p experience
+    found_workers = []
     for worker in self.all()
       if worker.gender() == gender || gender == "a"
-        if worker.can_drive() == can_drive
-          if worker.hourly_rate() <= max_hourly_rate
+        if worker.can_drive() == "t" || can_drive == "a"
+          if worker.hourly_rate() <= max_hourly_rate.to_f/$cost_multiplier
             if worker.experience_matches?(worker.experience(), experience, 100) || experience == "any"
-              returned_workers << worker
+              found_workers << worker
             end
           end
         end
       end
     end
-    return returned_workers
+    return found_workers
   end
 
 #  For searching using the search bar, where a user may type words with the incorrect spelling.
@@ -137,13 +114,13 @@ class Worker
   def self.find_by_experience_fuzzy(searched)
     all_workers = self.all()
     return all_workers if searched.strip == ""
-    returned_workers = []
+    found_workers = []
     for worker in all_workers
       if worker.experience_matches?(worker.experience(), searched, 60) || worker.experience_matches?(worker.keywords(), searched, 80)
-        returned_workers << worker
+        found_workers << worker
       end
     end
-    return returned_workers
+    return found_workers
   end
 
 #  Creates a string array and iterates through it, then returns true if any word matches the searched word by at least a certain percentage.
