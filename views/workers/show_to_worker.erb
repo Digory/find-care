@@ -14,4 +14,10 @@
 <% visit.increase_date_by_a_week() %>
 <% end %>
   <p><%=visit.get_details_for_worker()%></p>
+  <% if visit.check_database_for_approved() == "f" %>
+  <%= "this visit hasn't been approved yet!" %>
+    <form method="POST" action="/visits/<%=@worker.id%>/approve_visit/<%=visit.id()%>">
+      <input type="submit" value="APPROVE VISIT"/>
+    </form>
+    <% end %>
   <% end %>

@@ -45,32 +45,25 @@ class ServiceUser
     return results.map{|visit_info| Visit.new(visit_info)}
   end
 
-  def reduce_weekly_budget?(amount)
-    # remaining_budget = get_budget_from_database().to_f
-    if @weekly_budget - amount < 0
-      return false
-    else
-      @weekly_budget -= amount
-      update()
-      return true
-    end
+  def can_afford?(amount)
+    return @weekly_budget - amount > 0
   end
 
   def dynamically_update_budget()
     total_cost_of_all_visits = 0
     for visit in visits()
-      total_cost_of_all_visits += visit.get_cost()
+      total_cost_of_all_visits += visit.get_cost() if visit.check_database_for_approved()
     end
     @weekly_budget -= total_cost_of_all_visits
     update()
   end
 
-  # def get_budget_from_database()
-  #   sql = "SELECT weekly_budget FROM service_users WHERE id = $1"
-  #   values = [@id]
-  #   result = SqlRunner.run(sql, values)
-  #   return result.first['weekly_budget']
-  # end
+  def get_budget_from_database()
+    sql = "SELECT weekly_budget FROM service_users WHERE id = $1"
+    values = [@id]
+    result = SqlRunner.run(sql, values)
+    return result.first['weekly_budget']
+  end
 
   def self.all()
     sql = "SELECT * FROM service_users"

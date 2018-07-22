@@ -5,7 +5,7 @@ require_relative('CheckDate.rb')
 
 class Visit
 
-  attr_accessor :id, :service_user_id, :worker_id, :visit_date, :visit_time, :duration
+  attr_accessor :id, :service_user_id, :worker_id, :visit_date, :visit_time, :duration, :approved
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
@@ -14,11 +14,26 @@ class Visit
     @visit_date = options['visit_date']
     @visit_time = options['visit_time']
     @duration = options['duration'].to_f
+    @approved = false
   end
 
   def get_cost()
     worker = Worker.find(@worker_id)
     return worker.cost_to_employer().to_f * @duration
+  end
+
+  def approve()
+    service_user = ServiceUser.find(@service_user_id)
+    @approved = true
+    update()
+    service_user.dynamically_update_budget()
+  end
+
+  def check_database_for_approved()
+    sql = "SELECT visits.approved FROM visits WHERE id = $1"
+    values = [@id]
+    result = SqlRunner.run(sql, values)
+    return result.first['approved']
   end
 
   def get_details_for_service_user()
@@ -52,15 +67,15 @@ class Visit
   end
 
   def save()
-    sql = "INSERT INTO visits(service_user_id, worker_id, visit_date, visit_time, duration) VALUES($1, $2, $3, $4, $5) RETURNING id"
-    values = [@service_user_id, @worker_id, @visit_date, @visit_time, @duration]
+    sql = "INSERT INTO visits(service_user_id, worker_id, visit_date, visit_time, duration, approved) VALUES($1, $2, $3, $4, $5, $6) RETURNING id"
+    values = [@service_user_id, @worker_id, @visit_date, @visit_time, @duration, @approved]
     result = SqlRunner.run(sql,values)
     @id = result.first['id'].to_i
   end
 
   def update()
-    sql = "UPDATE visits SET (service_user_id, worker_id, visit_date, visit_time, duration) = ($1, $2, $3, $4, $5) WHERE id = $6"
-    values = [@service_user_id, @worker_id, @visit_date, @visit_time, @duration, @id]
+    sql = "UPDATE visits SET (service_user_id, worker_id, visit_date, visit_time, duration, approved) = ($1, $2, $3, $4, $5, $6) WHERE id = $7"
+    values = [@service_user_id, @worker_id, @visit_date, @visit_time, @duration, @approved, @id]
     SqlRunner.run(sql, values)
   end
 
@@ -116,7 +131,7 @@ class Visit
     total_hours = visit_days.size() * duration.to_f
     total_cost = worker_hourly_cost * total_hours
 
-    if service_user.reduce_weekly_budget?(total_cost)
+    if service_user.can_afford?(total_cost)
       for day in visit_days
         date = self.get_date_from_checkdate_string(CheckDate.find_next_day_of_the_week(day, visit_time).to_s)
         time = self.get_time_from_checkdate_string(CheckDate.find_next_day_of_the_week(day, visit_time).to_s)

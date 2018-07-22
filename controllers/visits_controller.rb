@@ -55,3 +55,11 @@ post '/visits/:id/delete' do
   service_user.dynamically_update_budget()
   redirect to "/visits"
 end
+
+# APPROVE
+
+post '/visits/:worker_id/approve_visit/:visit_id' do
+  visit = Visit.find(params['visit_id'])
+  visit.approve()
+  redirect to "/workers/#{params['worker_id']}"
+end

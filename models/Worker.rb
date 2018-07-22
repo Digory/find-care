@@ -5,7 +5,7 @@ require('similar_text')
 
 class Worker
 
-  attr_accessor :id, :name, :gender, :can_drive, :hourly_rate, :experience, :keywords
+  attr_accessor :id, :name, :gender, :can_drive, :hourly_rate, :experience, :visits_awaiting_approval, :keywords
 
   $cost_multiplier = 1.2
 
@@ -17,6 +17,7 @@ class Worker
     @hourly_rate = options['hourly_rate'].to_f
     @experience = options['experience']
 
+    @visits_awaiting_approval = []
     @keywords = options['keywords']?  options['keywords'] : ""
     create_keywords_string() unless options['keywords']
   end
@@ -30,6 +31,10 @@ class Worker
     @keywords << "female, woman, women," if @gender == "f"
     @keywords << "can drive, driver, driving," if @can_drive == true
     @keywords << "cheap, low cost," if @hourly_rate <= 8.75
+  end
+
+  def add_visit_awaiting_approval(visit)
+    @visits_awaiting_approval << visit
   end
 
   def get_info()

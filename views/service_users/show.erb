@@ -1,5 +1,5 @@
 <h1><%= @service_user.name() %></h1>
-<h2>Weekly Budget: £<%= @service_user.weekly_budget() %></h2>
+<h2>Weekly Budget: £<%= @service_user.get_budget_from_database() %></h2>
 
 <a href="/service_users/<%=@service_user.id%>/edit">EDIT</a>
 
@@ -46,7 +46,7 @@
 <% while CheckDate.is_in_past?(visit.get_database_visit_date(), visit.get_database_visit_time()) %>
 <% visit.increase_date_by_a_week() %>
 <% end %>
-  <p><%=visit.get_details_for_service_user()%></p>
+  <p><%=visit.get_details_for_service_user()%> approved = <%=visit.check_database_for_approved()%></p>
   <% end %>
 
 <p>Your workers:</p>

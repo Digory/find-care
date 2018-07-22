@@ -24,5 +24,6 @@ CREATE TABLE visits(
   worker_id INT8 REFERENCES workers(id) ON DELETE CASCADE,
   visit_date DATE,
   visit_time TIME,
-  duration DECIMAL(5,2)
+  duration DECIMAL(5,2),
+  approved BOOLEAN
 );
