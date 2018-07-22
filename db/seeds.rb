@@ -28,7 +28,7 @@ worker_1 = Worker.new({
   'gender' => 'm',
   'can_drive' => true,
   'hourly_rate' => 10.50,
-  'experience' => 'Visual Impairment, Autism, First Aid'
+  'experience' => 'Visual Impairment,Autism,First Aid'
   })
 worker_1.save()
 
@@ -37,7 +37,7 @@ worker_2 = Worker.new({
   'gender' => 'f',
   'can_drive' => false,
   'hourly_rate' => 8.75,
-  'experience' => 'Sign Language, Autism, Children'
+  'experience' => 'Sign Language,Autism,Children'
   })
 worker_2.save()
 
@@ -55,7 +55,7 @@ worker_4 = Worker.new({
   'gender' => 'f',
   'can_drive' => true,
   'hourly_rate' => 8.50,
-  'experience' => 'Children, Moving and Handling, Peg Feeding'
+  'experience' => 'Children,Moving and Handling,Peg Feeding'
   })
 worker_4.save()
 
@@ -73,7 +73,7 @@ worker_6 = Worker.new({
   'gender' => 'f',
   'can_drive' => true,
   'hourly_rate' => 11.30,
-  'experience' => 'Autism, Food Hygiene, First Aid'
+  'experience' => 'Autism,Food Hygiene,First Aid'
   })
 worker_6.save()
 

@@ -95,15 +95,21 @@ class Worker
     return workers.sort_by{|worker| worker.hourly_rate()}
   end
 
+  def does_experience_match_all_filters?(searched_array)
+    return true if searched_array.include?("any")
+    worker_experience_array = @experience.split(",")
+    return searched_array.all?{|string| worker_experience_array.include?(string)}
+  end
+
   # For searching using filters.
 
-  def self.find_by_experience_all_types(gender, can_drive, max_hourly_rate, experience)
+  def self.find_by_experience_all_types(gender, can_drive, max_hourly_rate, searched_array)
     found_workers = []
     for worker in self.all()
       if worker.gender() == gender || gender == "a"
         if worker.can_drive() == "t" || can_drive == "a"
           if worker.hourly_rate() <= max_hourly_rate.to_f/$cost_multiplier
-            if worker.experience_matches?(worker.experience(), experience, 100) || experience == "any"
+            if worker.does_experience_match_all_filters?(searched_array)
               found_workers << worker
             end
           end

@@ -93,8 +93,13 @@ class WorkerTest < MiniTest::Test
     assert_equal(1, actual)
   end
 
-  def test_find_by_experience_all_types__male_driver_hourly_rate_12_autism_experience()
-    actual = Worker.find_by_experience_all_types("m", "t", 13, "autism").length()
+  def test_find_by_experience_all_types__male_driver_hourly_rate_14_autism_experience()
+    actual = Worker.find_by_experience_all_types("m", "t", 14, ["Autism"]).length()
+    assert_equal(1, actual)
+  end
+
+  def test_find_by_experience_all_types__female_driver_hourly_rate_14_multiple_experience()
+    actual = Worker.find_by_experience_all_types("f", "t", 14, ["Children", "Moving and Handling"]).length()
     assert_equal(1, actual)
   end
 
