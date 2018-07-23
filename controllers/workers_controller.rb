@@ -7,7 +7,8 @@ require_relative('../models/Visit')
 
 # INDEX
 
-get '/workers/?' do
+get '/workers' do
+
   @workers = Worker.all()
   erb(:"workers/index")
 end
@@ -22,7 +23,7 @@ end
 
 post '/workers' do
   Worker.new(params).save()
-  redirect to "/"
+  erb :"workers/success"
 end
 
 # APPROVE

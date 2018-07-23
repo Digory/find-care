@@ -24,7 +24,7 @@ class Visit
 
   def approve()
     service_user = ServiceUser.find(@service_user_id)
-    @approved = true
+    @approved = true  
     update()
   end
 
