@@ -7,14 +7,16 @@
   <input type="submit" value="DELETE">
 </form>
 
-<form action="/workers/search_results/<%=@service_user.id()%>/fuzzy_search" method="POST">
+<form action="/workers/search_results/fuzzy_search" method="POST">
   <label for="search-bar">Search:</label>
-  <input id="search-bar" name="query"type="text"/>
+  <input type="hidden" value="<%=@service_user.id()%>" name="service_user_id">
+  <input id="search-bar" name="query" type="search" placeholder="search workers"/>
   <input type="submit" value="SEARCH">
 </form>
 
-<form action="/workers/search_results/<%=@service_user.id()%>/specific" method="POST">
+<form action="/workers/search_results/specific_search" method="POST">
    <h3>Gender</h3>
+  <input type="hidden" value="<%=@service_user.id()%>" name="service_user_id">
   <input type="radio" name="gender" value="m">Male<br>
   <input type="radio" name="gender" value="f">Female<br>
   <input type="radio" name="gender" value="a" checked>any<br>
@@ -51,5 +53,5 @@
 
 <p>Your workers:</p>
 <% for worker in @service_user.workers() %>
-  <a href="/workers/<%=worker.id()%>/view_profile/<%=@service_user.id()%>"><%=worker.name()%></a>
+  <a href="/workers/view?worker_id=<%=worker.id()%>&service_user_id=<%=@service_user.id()%>"><%=worker.name()%></a>
   <% end %>

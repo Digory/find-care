@@ -2,6 +2,4 @@
 
 <p><%=@worker.get_info()%><p>
 
-  <form action="/workers/<%=@worker.id()%>/book_worker/<%=@service_user.id()%>" method="POST">
-    <input type="submit" value="BOOK <%=@worker.name()%>">
-  </form>
+  <a href="/workers/book_worker?worker_id=<%=@worker.id()%>&service_user_id=<%=@service_user.id()%>">Book worker</a>

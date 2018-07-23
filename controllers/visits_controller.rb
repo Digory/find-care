@@ -6,14 +6,14 @@ require_relative('../models/Visit')
 
 # INDEX
 
-get '/visits/?' do
+get '/visits' do
   @visits = Visit.all()
   erb(:"visits/index")
 end
 
 # NEW
 
-get '/visits/new/?' do
+get '/visits/new' do
   erb(:"visits/new")
 end
 
@@ -26,16 +26,9 @@ end
 
 # SHOW
 
-get '/visits/:id/?' do
+get '/visits/:id' do
   @visit = Visit.find(params['id'])
   erb(:"visits/show")
-end
-
-# EDIT
-
-get '/visits/:id/edit/?' do
-  @visit = Visit.find(params['id'])
-  erb(:"visits/edit")
 end
 
 # UPDATE
@@ -46,6 +39,21 @@ post '/visits/:id' do
   redirect to "/visits/#{visit.id()}"
 end
 
+# EDIT
+
+get '/visits/:id/edit' do
+  @visit = Visit.find(params['id'])
+  erb(:"visits/edit")
+end
+
+# APPROVE
+
+post '/visits/:id/approve' do
+  visit = Visit.find(params['id'])
+  visit.approve()
+  redirect to "/workers/#{params['worker_id']}"
+end
+
 # DESTROY
 
 post '/visits/:id/delete' do
@@ -53,13 +61,5 @@ post '/visits/:id/delete' do
   service_user = ServiceUser.find(visit.service_user_id())
   service_user.increase_budget(visit.id())
   visit.delete()
-  redirect to "/"
-end
-
-# APPROVE
-
-post '/visits/:worker_id/approve_visit/:visit_id' do
-  visit = Visit.find(params['visit_id'])
-  visit.approve()
   redirect to "/workers/#{params['worker_id']}"
 end

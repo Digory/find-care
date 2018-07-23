@@ -6,14 +6,14 @@ require_relative('../models/CheckDate')
 
 # INDEX
 
-get '/service_users/?' do
+get '/service_users' do
   @service_users = ServiceUser.all()
   erb(:"service_users/index")
 end
 
 # NEW
 
-get '/service_users/new/?' do
+get '/service_users/new' do
   erb(:"service_users/new")
 end
 
@@ -31,16 +31,9 @@ get '/service_users/:id' do
   erb(:"service_users/show")
 end
 
-# FAILED BOOKING
-
-get '/service_users/:id/failed' do
-  @service_user_id = params['id']
-  erb(:"service_users/failed")
-end
-
 # EDIT
 
-get '/service_users/:id/edit/?' do
+get '/service_users/:id/edit' do
   @service_user = ServiceUser.find(params['id'])
   erb(:"service_users/edit")
 end

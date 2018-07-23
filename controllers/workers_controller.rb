@@ -22,14 +22,14 @@ end
 
 post '/workers' do
   Worker.new(params).save()
-  erb :"workers/success"
+  redirect to "workers/new_success"
 end
 
 # APPROVE
 
-post '/workers/approve/:id' do
-  Worker.find(params['id']).approve()
-  redirect to "/workers"
+post '/workers/approve' do
+  Worker.find(params['worker_id']).approve()
+  redirect to "/workers/show_unapproved"
 end
 
 # SHOW TO ADMIN
@@ -39,19 +39,27 @@ get '/workers/show_unapproved' do
   erb(:"workers/show_unapproved")
 end
 
+# SHOW TO SERVICE USER
+
+get '/workers/view' do
+  @worker = Worker.find(params['worker_id'])
+  @service_user = ServiceUser.find(params['service_user_id'])
+  erb(:"workers/show_to_service_user")
+end
+
+# BOOK WORKER
+
+get '/workers/book_worker' do
+  @worker = Worker.find(params['worker_id'])
+  @service_user = ServiceUser.find(params['service_user_id'])
+  erb(:"workers/book")
+end
+
 # SHOW TO WORKER
 
 get '/workers/:id' do
   @worker = Worker.find(params['id'])
   erb(:"workers/show_to_worker")
-end
-
-# SHOW TO SERVICE USER
-
-get '/workers/:worker_id/view_profile/:service_user_id' do
-  @worker = Worker.find(params['worker_id'])
-  @service_user = ServiceUser.find(params['service_user_id'])
-  erb(:"workers/show_to_service_user")
 end
 
 
@@ -64,22 +72,37 @@ end
 
 # FUZZY SEARCH
 
-post '/workers/search_results/:id/fuzzy_search' do
+post '/workers/search_results/fuzzy_search' do
   @found_workers = Worker.find_by_experience_fuzzy(params['query'])
   @found_workers = Worker.sort_by_cost(@found_workers)
   @found_workers = Worker.remove_unapproved(@found_workers)
 
-  @service_user = ServiceUser.find(params['id'])
+  @service_user = ServiceUser.find(params['service_user_id'])
   erb(:"workers/search_results")
 end
 
 # SPECIFIC SEARCH
 
-post '/workers/search_results/:id/specific' do
+post '/workers/search_results/specific_search' do
   @found_workers = Worker.find_by_experience_all_types(params['gender'],params['can-drive'], params['max-hourly'], params['experience'])
   @found_workers = Worker.sort_by_cost(@found_workers)
-  @service_user = ServiceUser.find(params['id'])
+  @service_user = ServiceUser.find(params['service_user_id'])
   erb(:"workers/search_results")
+end
+
+# CONFIRM BOOKING
+
+post '/workers/confirm_booking' do
+  worker = Worker.find(params['worker_id'])
+  @service_user = ServiceUser.find(params['service_user_id'])
+
+  # If a service user cannot afford the visit they are told this, and the visit is not created.
+
+  if Visit.create_with_these_parameters?(@service_user.id(), worker.id(), params['visit_days'],           params['visit_time'], params['duration'])
+     redirect to "/service_users/#{@service_user.id()}"
+    else
+     erb(:"/workers/booking_failed")
+    end
 end
 
 # UPDATE
@@ -90,28 +113,6 @@ post '/workers/:id' do
   redirect to "/workers/#{worker.id()}"
 end
 
-# BOOK WORKER
-
-post '/workers/:worker_id/book_worker/:service_user_id' do
-  @worker = Worker.find(params['worker_id'])
-  @service_user = ServiceUser.find(params['service_user_id'])
-  erb(:"workers/book")
-end
-
-# CONFIRM BOOKING
-
-post '/workers/:worker_id/confirm_booking/:service_user_id' do
-  worker = Worker.find(params['worker_id'])
-  service_user = ServiceUser.find(params['service_user_id'])
-
-  # If a service user cannot afford the visit they are told this, and the visit is not created.
-
-  if Visit.create_with_these_parameters?(service_user.id(), worker.id(), params['visit_days'],           params['visit_time'], params['duration'])
-     redirect to "/service_users/#{service_user.id()}"
-    else
-     redirect to "/service_users/#{service_user.id()}/failed"
-    end
-end
 
 # DESTROY
 
