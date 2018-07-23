@@ -1,0 +1,7 @@
+<%for worker in @unapproved_workers %>
+<%=worker.name() %>
+<form method="POST" action="/workers/approve/<%=worker.id()%>">
+<input type="submit" value="Approve worker">
+</form>
+
+<%end%>

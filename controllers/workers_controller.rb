@@ -8,7 +8,6 @@ require_relative('../models/Visit')
 # INDEX
 
 get '/workers' do
-
   @workers = Worker.all()
   erb(:"workers/index")
 end
@@ -31,6 +30,13 @@ end
 post '/workers/approve/:id' do
   Worker.find(params['id']).approve()
   redirect to "/workers"
+end
+
+# SHOW TO ADMIN
+
+get '/workers/show_unapproved' do
+  @unapproved_workers = Worker.remove_approved(Worker.all())
+  erb(:"workers/show_unapproved")
 end
 
 # SHOW TO WORKER

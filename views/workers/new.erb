@@ -2,7 +2,7 @@
 
 <form method="POST" action="/workers">
   <label for="worker-name">Name of worker:</label>
-  <input id="worker-name" type="text" name="name">
+  <input id="worker-name" type="text" required="required" name="name">
   <label for="worker-gender">Gender:</label>
   <select id="worker-gender" name="gender">
     <option value="m">male</option>
@@ -14,9 +14,9 @@
     <option value="false">no</option>
   </select>
   <label for="hourly-rate">Hourly rate:</label>
-  <input id="hourly-rate" type="text" name="hourly_rate">
+  <input id="hourly-rate" type="text" name="hourly_rate" required="required">
   <label for="worker-experience">Experience:</label>
-  <input id="worker-experience" type="text" name="experience">
+  <input id="worker-experience" type="text" name="experience" required="required">
 
     <input type="submit" value="Create worker">
 </form>

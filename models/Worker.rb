@@ -126,6 +126,10 @@ class Worker
     return workers.select{|worker| worker.approved() == true}
   end
 
+  def self.remove_approved(workers)
+    return workers.select{|worker| worker.approved() == false}
+  end
+
   def does_experience_match_all_filters?(searched_array)
     return true if searched_array.include?("any")
     worker_experience_array = @experience.split(",")
