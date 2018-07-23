@@ -60,6 +60,8 @@ end
 post '/workers/search_results/:id/fuzzy_search' do
   @found_workers = Worker.find_by_experience_fuzzy(params['query'])
   @found_workers = Worker.sort_by_cost(@found_workers)
+  @found_workers = Worker.remove_unapproved(@found_workers)
+
   @service_user = ServiceUser.find(params['id'])
   erb(:"workers/search_results")
 end

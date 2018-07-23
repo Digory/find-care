@@ -17,21 +17,22 @@ class Worker
     @hourly_rate = options['hourly_rate'].to_f
     @experience = options['experience']
 
-    @approved = false
-    # @visits_awaiting_approval = []
+
+    @approved =  options['approved'] == 't' ? true : false
     @keywords = options['keywords']?  options['keywords'] : ""
     create_keywords_string() unless options['keywords']
   end
 
   # The @keywords string will be used to help with the fuzzy search.
 
-  def create_keywords_string()
-    first_name = @name.slice(0..-4)
-    @keywords << "#{first_name},"
+   def create_keywords_string()
+  #   first_name = @name.slice(0..-4)
+    @keywords << "#{name},"
     @keywords << "male, man, men," if @gender == "m"
     @keywords << "female, woman, women," if @gender == "f"
     @keywords << "can drive, driver, driving," if @can_drive == true
     @keywords << "cheap, low cost," if @hourly_rate <= 8.75
+    update()
   end
 
   # def add_visit_awaiting_approval(visit)
@@ -46,13 +47,13 @@ class Worker
     @approved = true
     update()
   end
-
-  def check_database_for_approved()
-    sql = "SELECT approved FROM workers WHERE id = $1"
-    values = [@id]
-    result = SqlRunner.run(sql, values)
-    return result.first['approved']
-  end
+  #
+  # def check_database_for_approved()
+  #   sql = "SELECT approved FROM workers WHERE id = $1"
+  #   values = [@id]
+  #   result = SqlRunner.run(sql, values)
+  #   return result.first['approved']
+  # end
 
   def cost_to_employer()
     return sprintf('%.2f', @hourly_rate * $cost_multiplier)
@@ -119,6 +120,10 @@ class Worker
 
   def self.sort_by_cost(workers)
     return workers.sort_by{|worker| worker.hourly_rate()}
+  end
+
+  def self.remove_unapproved(workers)
+    return workers.select{|worker| worker.approved() == true}
   end
 
   def does_experience_match_all_filters?(searched_array)

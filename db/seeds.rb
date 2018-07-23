@@ -24,7 +24,7 @@ service_user_3 = ServiceUser.new({
 service_user_3.save()
 
 worker_1 = Worker.new({
-  'name' => 'James T.',
+  'name' => 'James',
   'gender' => 'm',
   'can_drive' => true,
   'hourly_rate' => 10.50,
@@ -33,7 +33,7 @@ worker_1 = Worker.new({
 worker_1.save()
 
 worker_2 = Worker.new({
-  'name' => 'Lorna H.',
+  'name' => 'Lorna',
   'gender' => 'f',
   'can_drive' => false,
   'hourly_rate' => 8.75,
@@ -42,7 +42,7 @@ worker_2 = Worker.new({
 worker_2.save()
 
 worker_3 = Worker.new({
-  'name' => 'Bob L.',
+  'name' => 'Bob',
   'gender' => 'm',
   'can_drive' => true,
   'hourly_rate' => 9.20,
@@ -51,7 +51,7 @@ worker_3 = Worker.new({
 worker_3.save()
 
 worker_4 = Worker.new({
-  'name' => 'Jenna F.',
+  'name' => 'Jenna',
   'gender' => 'f',
   'can_drive' => true,
   'hourly_rate' => 8.50,
@@ -60,7 +60,7 @@ worker_4 = Worker.new({
 worker_4.save()
 
 worker_5 = Worker.new({
-  'name' => 'Bill N.',
+  'name' => 'Bill',
   'gender' => 'm',
   'can_drive' => false,
   'hourly_rate' => 9.00,
@@ -69,7 +69,7 @@ worker_5 = Worker.new({
 worker_5.save()
 
 worker_6 = Worker.new({
-  'name' => 'Jillian M.',
+  'name' => 'Jillian',
   'gender' => 'f',
   'can_drive' => true,
   'hourly_rate' => 11.30,
