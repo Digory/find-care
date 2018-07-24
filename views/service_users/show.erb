@@ -66,7 +66,7 @@
       <% while CheckDate.is_in_past?(visit.get_database_visit_date(), visit.get_database_visit_time()) %>
       <% visit.increase_date_by_a_week() %>
       <% end %>
-        <p><%=visit.get_details_for_service_user()%> approved = <%=visit.check_database_for_approved()%></p>
+        <p><%=visit.get_details_for_service_user()%> approved = <%=visit.approved()%></p>
         <% end %>
 
       <p>Your workers:</p>

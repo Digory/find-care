@@ -68,88 +68,88 @@ class WorkerTest < MiniTest::Test
     assert_equal(@seeds.worker_4.id(), actual)
   end
 
-  def test_find_by_experience_all_types__any_gender_any_experience()
-    actual = Worker.find_by_experience_all_types("a", "a", 100, "any").length()
+  def test_filtered_search__any_gender_any_experience()
+    actual = Worker.filtered_search("a", "a", 100, "any").length()
     assert_equal(6, actual)
   end
 
-  def test_find_by_experience_all_types__male_any_experience()
-    actual = Worker.find_by_experience_all_types("m", "a", 100, "any").length()
+  def test_filtered_search__male_any_experience()
+    actual = Worker.filtered_search("m", "a", 100, "any").length()
     assert_equal(3, actual)
   end
 
-  def test_find_by_experience_all_types__female_any_experience()
-    actual = Worker.find_by_experience_all_types("f", "a", 100, "any").length()
+  def test_filtered_search__female_any_experience()
+    actual = Worker.filtered_search("f", "a", 100, "any").length()
     assert_equal(3, actual)
   end
 
-  def test_find_by_experience_all_types__male_driver_any_experience()
-    actual = Worker.find_by_experience_all_types("m", "t", 100, "any").length()
+  def test_filtered_search__male_driver_any_experience()
+    actual = Worker.filtered_search("m", "t", 100, "any").length()
     assert_equal(2, actual)
   end
 
-  def test_find_by_experience_all_types__female_driver_hourly_rate_11_any_experience()
-    actual = Worker.find_by_experience_all_types("f", "t", 11, "any").length()
+  def test_filtered_search__female_driver_hourly_rate_11_any_experience()
+    actual = Worker.filtered_search("f", "t", 11, "any").length()
     assert_equal(1, actual)
   end
 
-  def test_find_by_experience_all_types__male_driver_hourly_rate_14_autism_experience()
-    actual = Worker.find_by_experience_all_types("m", "t", 14, ["Autism"]).length()
+  def test_filtered_search__male_driver_hourly_rate_14_autism_experience()
+    actual = Worker.filtered_search("m", "t", 14, ["Autism"]).length()
     assert_equal(1, actual)
   end
 
-  def test_find_by_experience_all_types__female_driver_hourly_rate_14_multiple_experience()
-    actual = Worker.find_by_experience_all_types("f", "t", 14, ["Children", "Moving and Handling"]).length()
+  def test_filtered_search__female_driver_hourly_rate_14_multiple_experience()
+    actual = Worker.filtered_search("f", "t", 14, ["Children", "Moving and Handling"]).length()
     assert_equal(1, actual)
   end
 
-  def test_find_by_experience_fuzzy__partial_word()
-    actual = Worker.find_by_experience_fuzzy('irst').length()
+  def test_fuzzy_search__partial_word()
+    actual = Worker.fuzzy_search('irst').length()
     assert_equal(2, actual)
   end
 
-  def test_find_by_experience_fuzzy__multiple_words()
-    actual = Worker.find_by_experience_fuzzy('irst aid').length()
+  def test_fuzzy_search__multiple_words()
+    actual = Worker.fuzzy_search('irst aid').length()
     assert_equal(2, actual)
   end
 
-  def test_find_by_experience_fuzzy__case_insensitive()
-    actual = Worker.find_by_experience_fuzzy('aUTIsm').length()
+  def test_fuzzy_search__case_insensitive()
+    actual = Worker.fuzzy_search('aUTIsm').length()
     assert_equal(3, actual)
   end
 
-  def test_find_by_experience_fuzzy__letters_wrong()
-    actual = Worker.find_by_experience_fuzzy('syn language').length()
+  def test_fuzzy_search__letters_wrong()
+    actual = Worker.fuzzy_search('syn language').length()
     assert_equal(1, actual)
   end
 
-  def test_find_by_experience_fuzzy__leading_spaces()
-    actual = Worker.find_by_experience_fuzzy('  syn language').length()
+  def test_fuzzy_search__leading_spaces()
+    actual = Worker.fuzzy_search('  syn language').length()
     assert_equal(1, actual)
   end
 
-  def test_find_by_experience_fuzzy__trailing_spaces()
-    actual = Worker.find_by_experience_fuzzy('syn language  ').length()
+  def test_fuzzy_search__trailing_spaces()
+    actual = Worker.fuzzy_search('syn language  ').length()
     assert_equal(1, actual)
   end
 
-  def test_find_by_experience_fuzzy__keywords_correct_word()
-    actual = Worker.find_by_experience_fuzzy('driver').length()
+  def test_fuzzy_search__keywords_correct_word()
+    actual = Worker.fuzzy_search('driver').length()
     assert_equal(4, actual)
   end
 
-  def test_find_by_experience_fuzzy__keywords_word_spelling_wrong()
-    actual = Worker.find_by_experience_fuzzy('chep').length()
+  def test_fuzzy_search__keywords_word_spelling_wrong()
+    actual = Worker.fuzzy_search('chep').length()
     assert_equal(2, actual)
   end
 
-  def test_find_by_experience_fuzzy__keywords_gender_spelling_wrong_1()
-    actual = Worker.find_by_experience_fuzzy('mans').length()
+  def test_fuzzy_search__keywords_gender_spelling_wrong_1()
+    actual = Worker.fuzzy_search('mans').length()
     assert_equal(3, actual)
   end
 
-  def test_find_by_experience_fuzzy__keywords_gender_spelling_wrong_2()
-    actual = Worker.find_by_experience_fuzzy('wimen').length()
+  def test_fuzzy_search__keywords_gender_spelling_wrong_2()
+    actual = Worker.fuzzy_search('wimen').length()
     assert_equal(3, actual)
   end
 

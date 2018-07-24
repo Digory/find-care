@@ -166,7 +166,7 @@ line-height: 45px;
   justify-content: space-between;
 }
 
-.specific-search {
+.filtered-search {
   display: flex;
   flex-direction: column;
   justify-content: space-around;

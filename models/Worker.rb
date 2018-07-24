@@ -138,7 +138,7 @@ class Worker
 
   # For searching using filters.
 
-  def self.find_by_experience_all_types(gender, can_drive, max_hourly_rate, searched_array)
+  def self.filtered_search(gender, can_drive, max_hourly_rate, searched_array)
     found_workers = []
     for worker in self.all()
       if worker.gender() == gender || gender == "a"
@@ -156,7 +156,7 @@ class Worker
 
 #  For searching using the search bar, where a user may type words with the incorrect spelling.
 
-  def self.find_by_experience_fuzzy(searched)
+  def self.fuzzy_search(searched)
     all_workers = self.all()
     return all_workers if searched.strip == ""
     found_workers = []

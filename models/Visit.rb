@@ -14,7 +14,7 @@ class Visit
     @visit_date = options['visit_date']
     @visit_time = options['visit_time']
     @duration = options['duration'].to_f
-    @approved = false
+    @approved =  options['approved'] == 't' ? true : false
   end
 
   def get_cost()
@@ -24,16 +24,16 @@ class Visit
 
   def approve()
     service_user = ServiceUser.find(@service_user_id)
-    @approved = true  
+    @approved = true
     update()
   end
 
-  def check_database_for_approved()
-    sql = "SELECT visits.approved FROM visits WHERE id = $1"
-    values = [@id]
-    result = SqlRunner.run(sql, values)
-    return result.first['approved']
-  end
+  # def check_database_for_approved()
+  #   sql = "SELECT visits.approved FROM visits WHERE id = $1"
+  #   values = [@id]
+  #   result = SqlRunner.run(sql, values)
+  #   return result.first['approved']
+  # end
 
   def get_details_for_service_user()
     worker_cost = get_cost()
