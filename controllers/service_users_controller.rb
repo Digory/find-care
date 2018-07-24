@@ -17,6 +17,27 @@ get '/service_users/new' do
   erb(:"service_users/new")
 end
 
+# SHOW SEARCH OPTIONS
+
+get '/service_users/show_search_options' do
+  @service_user = ServiceUser.find(params['service_user_id'])
+  erb(:"service_users/show_search_options")
+end
+
+# SHOW FILTERED SEARCH
+
+get '/service_users/filtered_search' do
+  @service_user = ServiceUser.find(params['service_user_id'])
+  erb(:"service_users/filtered_search")
+end
+
+# SHOW FUZZY SEARCH
+
+get '/service_users/fuzzy_search' do
+  @service_user = ServiceUser.find(params['service_user_id'])
+  erb(:"service_users/fuzzy_search")
+end
+
 # CREATE
 
 post '/service_users' do

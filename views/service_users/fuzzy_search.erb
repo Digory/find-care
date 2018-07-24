@@ -1,0 +1,7 @@
+<section class="fuzzy-search">
+  <form action="/workers/search_results/fuzzy_search" method="GET">
+    <label for="search-bar">Search:</label>
+    <input type="hidden" value="<%=@service_user.id()%>" name="service_user_id">
+    <input id="search-bar" name="query" type="search" placeholder="search workers"/>
+    <input type="submit" value="SEARCH">
+  </form>

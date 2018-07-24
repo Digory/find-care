@@ -1,0 +1,44 @@
+<form  class="filtered-search" action="/workers/search_results/filtered_search" method="GET">
+  <input type="hidden" value="<%=@service_user.id()%>" name="service_user_id">
+  <h1>Gender</h1>
+  <div class="form-section">
+    <div class="radio-button">
+      <input type="radio" name="gender" value="m"><label for="gender">Male</label>
+    </div>
+    <div class="radio-button">
+      <input type="radio" name="gender" value="f"><label for="gender">Female</label>
+    </div>
+    <div class="radio-button">
+      <input type="radio" name="gender" value="a" checked>any
+    </div>
+  </div>
+  <h3>Driving status</h3>
+  <div class="form-section">
+
+    <input type="radio" name="can-drive" value="t">can drive
+    <input type="radio" name="can-drive" value="a" checked>no preference
+  </div>
+  <h3>Max hourly cost to me</h3>
+  <div class="form-section">
+
+    <input type="radio" name="max-hourly" value="10">£10
+    <input type="radio" name="max-hourly" value="12">£12
+    <input type="radio" name="max-hourly" value="14">£14
+    <input type="radio" name="max-hourly" value="16">£16
+    <input type="radio" name="max-hourly" value="1000" checked>any
+  </div>
+  <h3>Experience</h3>
+  <div class="form-section">
+
+    <input type="checkbox" name="experience[]" value="Autism">Autism
+    <input type="checkbox" name="experience[]" value="Sign Language">Sign Language
+    <input type="checkbox" name="experience[]" value="Moving and Handling">Moving and Handling
+    <input type="checkbox" name="experience[]" value="First Aid">First Aid
+    <input type="checkbox" name="experience[]" value="Food Hygiene">Food Hygiene
+    <input type="checkbox" name="experience[]" value="Visual Impairment">Visual Impairment
+    <input type="checkbox" name="experience[]" value="Peg Feeding">Peg Feeding
+    <input type="checkbox" name="experience[]" value="Children">Children
+    <input type="checkbox" name="experience[]" value="any" checked>Any
+  </div>
+  <input type="submit" value="SEARCH FOR THESE CRITERIA">
+</form>
