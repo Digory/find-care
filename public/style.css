@@ -6,6 +6,10 @@
     Arial;
 }
 
+h1{
+  font-size: 2.3em;
+}
+
 /*
 body {
 	height: 100%;
@@ -154,13 +158,18 @@ line-height: 45px;
 }
 
 .options{
-  padding-top: 1em;
-  font-size: 2em;
+  padding-top: 1.5em;
+  font-size: 1.3em;
+}
+
+.optionsPageBottom{
+  padding-top: 3em;
+  font-size: 1.3em;
 }
 
 .options li{
-  display: inline;
-  padding: 2em;
+  /* display: inline; */
+  /* padding: 2em; */
 }
 
 .options ul{
@@ -191,7 +200,7 @@ line-height: 45px;
   border: 0.05em solid black;
 }
 
-.greyButton a {
+.greyButtonLarge a {
   background-color: #e6f2ff;
   border-radius: 50%;
   opacity: 1;
@@ -199,13 +208,30 @@ line-height: 45px;
   transition: 0.3s;
   color: inherit;
   text-decoration: none;
-  border: 0.05em solid black;
+  /* border: 0.05em solid black; */
 }
 
-.greyButton a:hover {
+.greyButtonLarge a:hover {
   opacity: 1;
   background-color: white;
   border: 0.05em solid black;
+}
+
+.greyButtonSmall a {
+  background-color: #e6f2ff;
+  border-radius: 50%;
+  opacity: 1;
+  padding: 0.5em;
+  transition: 0.3s;
+  color: inherit;
+  text-decoration: none;
+  /* border: 0.05em solid black; */
+}
+
+.greyButtonSmall a:hover {
+  opacity: 1;
+  background-color: white;
+  border: 0.03em solid black;
 }
 
 
