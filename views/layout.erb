@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+
+    <title>Find Care homepage</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="Digory's favicon.ico"/>
+
     <meta charset="utf-8">
     <title>Find Care</title>
   </head>
   <body>
-    <a href="/">Home</a><br>
+    <header>
+        <div id="logo"><a href="/"><i class="fa fa-home"></i></a></div>
+        <nav>
+          <ul>
+            <li><a href="#">Service user</a></li>
+            <li><a href="#">Service worker</a></li>
+            <li><a href="#">Admin</a></li>
+          </ul>
+        </nav>
+    </header>
+
     <section id="content">
-<%= yield %>
-</section>
+      <%= yield %>
+    </section>
   </body>
 </html>

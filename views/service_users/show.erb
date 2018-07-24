@@ -1,57 +1,76 @@
 <h1><%= @service_user.name() %></h1>
 <h2>Weekly Budget: £<%= @service_user.get_budget_from_database() %></h2>
 
-<a href="/service_users/<%=@service_user.id%>/edit">EDIT</a>
+  <a href="/service_users/<%=@service_user.id%>/edit">EDIT</a>
 
-<form action="/service_users/<%=@service_user.id%>/delete" method="POST">
-  <input type="submit" value="DELETE">
-</form>
+  <form action="/service_users/<%=@service_user.id%>/delete" method="POST">
+    <input type="submit" value="DELETE">
+  </form>
+  <div class="profile-page">
+    <section class="fuzzy-search">
+      <form action="/workers/search_results/fuzzy_search" method="GET">
+        <label for="search-bar">Search:</label>
+        <input type="hidden" value="<%=@service_user.id()%>" name="service_user_id">
+        <input id="search-bar" name="query" type="search" placeholder="search workers"/>
+        <input type="submit" value="SEARCH">
+      </form>
+    </section>
+    <section>
+      <form  class="filtered-search" action="/workers/search_results/filtered_search" method="GET">
+        <input type="hidden" value="<%=@service_user.id()%>" name="service_user_id">
+        <h1>Gender</h1>
+        <div class="form-section">
+          <div class="radio-button">
+            <input type="radio" name="gender" value="m"><label for="gender">Male</label>
+          </div>
+          <div class="radio-button">
+            <input type="radio" name="gender" value="f"><label for="gender">Female</label>
+          </div>
+          <div class="radio-button">
+            <input type="radio" name="gender" value="a" checked>any
+          </div>
+        </div>
+        <h3>Driving status</h3>
+        <div class="form-section">
 
-<form action="/workers/search_results/fuzzy_search" method="GET">
-  <label for="search-bar">Search:</label>
-  <input type="hidden" value="<%=@service_user.id()%>" name="service_user_id">
-  <input id="search-bar" name="query" type="search" placeholder="search workers"/>
-  <input type="submit" value="SEARCH">
-</form>
+          <input type="radio" name="can-drive" value="t">can drive
+          <input type="radio" name="can-drive" value="a" checked>no preference
+        </div>
+        <h3>Max hourly cost to me</h3>
+        <div class="form-section">
 
-<form action="/workers/search_results/specific_search" method="GET">
-   <h3>Gender</h3>
-  <input type="hidden" value="<%=@service_user.id()%>" name="service_user_id">
-  <input type="radio" name="gender" value="m">Male<br>
-  <input type="radio" name="gender" value="f">Female<br>
-  <input type="radio" name="gender" value="a" checked>any<br>
-  <h3>Driving status</h3>
-  <input type="radio" name="can-drive" value="t">can drive<br>
-  <input type="radio" name="can-drive" value="a" checked>no preference<br>
-  <h3>Max hourly cost to me</h3>
-  <input type="radio" name="max-hourly" value="10">£10<br>
-  <input type="radio" name="max-hourly" value="12">£12<br>
-  <input type="radio" name="max-hourly" value="14">£14<br>
-  <input type="radio" name="max-hourly" value="16">£16<br>
-  <input type="radio" name="max-hourly" value="1000" checked>any<br>
-  <h3>Experience</h3>
-  <input type="checkbox" name="experience[]" value="Autism">Autism<br>
-  <input type="checkbox" name="experience[]" value="Sign Language">Sign Language<br>
-  <input type="checkbox" name="experience[]" value="Moving and Handling">Moving and Handling<br>
-  <input type="checkbox" name="experience[]" value="First Aid">First Aid<br>
-  <input type="checkbox" name="experience[]" value="Food Hygiene">Food Hygiene<br>
-  <input type="checkbox" name="experience[]" value="Visual Impairment">Visual Impairment<br>
-  <input type="checkbox" name="experience[]" value="Peg Feeding">Peg Feeding<br>
-  <input type="checkbox" name="experience[]" value="Children">Children<br>
-  <input type="checkbox" name="experience[]" value="any" checked>Any<br>
+          <input type="radio" name="max-hourly" value="10">£10
+          <input type="radio" name="max-hourly" value="12">£12
+          <input type="radio" name="max-hourly" value="14">£14
+          <input type="radio" name="max-hourly" value="16">£16
+          <input type="radio" name="max-hourly" value="1000" checked>any
+        </div>
+        <h3>Experience</h3>
+        <div class="form-section">
 
-  <input type="submit" value="SEARCH FOR THESE CRITERIA">
-</form>
+          <input type="checkbox" name="experience[]" value="Autism">Autism
+          <input type="checkbox" name="experience[]" value="Sign Language">Sign Language
+          <input type="checkbox" name="experience[]" value="Moving and Handling">Moving and Handling
+          <input type="checkbox" name="experience[]" value="First Aid">First Aid
+          <input type="checkbox" name="experience[]" value="Food Hygiene">Food Hygiene
+          <input type="checkbox" name="experience[]" value="Visual Impairment">Visual Impairment
+          <input type="checkbox" name="experience[]" value="Peg Feeding">Peg Feeding
+          <input type="checkbox" name="experience[]" value="Children">Children
+          <input type="checkbox" name="experience[]" value="any" checked>Any
+        </div>
+        <input type="submit" value="SEARCH FOR THESE CRITERIA">
+      </form>
 
-<p>Next visits:</p>
-<% for visit in @service_user.visits() %>
-<% while CheckDate.is_in_past?(visit.get_database_visit_date(), visit.get_database_visit_time()) %>
-<% visit.increase_date_by_a_week() %>
-<% end %>
-  <p><%=visit.get_details_for_service_user()%> approved = <%=visit.check_database_for_approved()%></p>
-  <% end %>
+      <p>Next visits:</p>
+      <% for visit in @service_user.visits() %>
+      <% while CheckDate.is_in_past?(visit.get_database_visit_date(), visit.get_database_visit_time()) %>
+      <% visit.increase_date_by_a_week() %>
+      <% end %>
+        <p><%=visit.get_details_for_service_user()%> approved = <%=visit.check_database_for_approved()%></p>
+        <% end %>
 
-<p>Your workers:</p>
-<% for worker in @service_user.workers() %>
-  <a href="/workers/view?worker_id=<%=worker.id()%>&service_user_id=<%=@service_user.id()%>"><%=worker.name()%></a>
-  <% end %>
+      <p>Your workers:</p>
+      <% for worker in @service_user.workers() %>
+        <a href="/workers/view?worker_id=<%=worker.id()%>&service_user_id=<%=@service_user.id()%>"><%=worker.name()%></a>
+        <% end %>
+    </div>
