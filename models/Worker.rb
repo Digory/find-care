@@ -59,6 +59,10 @@ class Worker
     @approved = true
     update()
   end
+
+  def approved_string()
+    return (@approved? "" : "AWAITING ADMIN APPROVAL")
+  end
   #
   # def check_database_for_approved()
   #   sql = "SELECT approved FROM workers WHERE id = $1"
