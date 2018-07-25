@@ -81,8 +81,8 @@ line-height: 45px;
 }
 
 .options li{
-  /* display: inline; */
-  /* padding: 2em; */
+  display: inline;
+   /* padding: 2em; */
 }
 
 .options ul{
@@ -209,7 +209,7 @@ line-height: 45px;
   margin: auto;
 }
 
-.form-section {
+/* .form-section {
   display: flex;
   justify-content: space-between;
 }
@@ -222,7 +222,7 @@ line-height: 45px;
 }
 .form-section h1{
   align
-}
+} */
 
 .radio-button input {
   width: 25px;

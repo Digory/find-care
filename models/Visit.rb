@@ -45,7 +45,7 @@ class Visit
   end
 
   def add_to_normal_visit_string()
-    return (approved()? "" : " &#8592 Awaiting confirmation.")
+    return (approved()? "" : "Awaiting confirmation &#8594 ")
   end
 
   def get_details_for_worker()

@@ -24,6 +24,13 @@ post '/visits' do
   redirect to "/visits"
 end
 
+# SHOW BEFORE DELETION
+
+get '/visits/show_before_deletion' do
+  @visit = Visit.find(params['visit_id'])
+  erb(:"visits/show_before_deletion")
+end
+
 # SHOW
 
 get '/visits/:id' do
@@ -61,5 +68,6 @@ post '/visits/:id/delete' do
   service_user = ServiceUser.find(visit.service_user_id())
   service_user.increase_budget(visit.id())
   visit.delete()
-  redirect to "/workers/#{params['worker_id']}"
+  redirect to "/workers/#{params['worker_id']}" if params['worker_id']
+  redirect to "/service_users/#{service_user.id()}"
 end

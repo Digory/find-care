@@ -15,7 +15,11 @@
       <div class="profile-page-section">
         <h3>All visits</h3>
       <% for visit in @visits %>
-        <p><%=visit.normal_visit_string()%><strong><%=visit.add_to_normal_visit_string()%></strong></p>
+        <p><strong><%=visit.add_to_normal_visit_string()%></strong><%=visit.normal_visit_string()%>
+          <div class="profile-page-section">
+          <div class="greyButtonSmall">
+          <a href="/visits/show_before_deletion?visit_id=<%=visit.id()%>">cancel above visit</a>
+        </div></div></p>
         <% end %>
     </div>
 
