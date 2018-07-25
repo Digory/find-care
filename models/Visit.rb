@@ -132,7 +132,10 @@ class Visit
 
     if service_user.can_afford?(total_cost)
       for day in visit_days
+        p CheckDate.find_next_day_of_the_week(day, visit_time).to_s
+
         date = self.get_date_from_checkdate_string(CheckDate.find_next_day_of_the_week(day, visit_time).to_s)
+        p date
         time = self.get_time_from_checkdate_string(CheckDate.find_next_day_of_the_week(day, visit_time).to_s)
         visit = Visit.new({
           'service_user_id' => service_user_id,

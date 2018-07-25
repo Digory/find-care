@@ -44,7 +44,7 @@ class ServiceUserTest < MiniTest::Test
   def test_update()
     @seeds.service_user_1.weekly_budget = 400
     @seeds.service_user_1.update()
-    actual = @seeds.service_user_1.get_budget_from_database().to_f
+    actual = @seeds.service_user_1.weekly_budget().to_f
     assert_equal(400.00, actual)
   end
 
@@ -58,17 +58,16 @@ class ServiceUserTest < MiniTest::Test
     assert_equal(2, actual)
   end
 
-  def test_reduce_weekly_budget__reduces_budget()
-    @seeds.service_user_1.reduce_weekly_budget?(100)
-    service_user_test = ServiceUser.find(@seeds.service_user_1.id())
-    actual = service_user_test.weekly_budget()
-    assert_equal(700, actual)
+  def test_percentage_of_weekly_budget_used()
+    visit = Visit.new({
+      'service_user_id' => @seeds.service_user_2.id,
+      'worker_id' => @seeds.worker_1.id,
+      'visit_date' => '2018-06-01',
+      'visit_time' => '09:00:00',
+      'duration' => 3
+      })
+    visit.save()
+    p @seeds.service_user_2.percentage_of_weekly_budget_used()
   end
-
-  def test_reduce_weekly_budget__returns_false()
-    actual = @seeds.service_user_1.reduce_weekly_budget?(900)
-    assert_equal(false, actual)
-  end
-
 
 end

@@ -4,25 +4,25 @@ require_relative('Visit.rb')
 
 class ServiceUser
 
-  attr_accessor :id, :name, :weekly_budget
+  attr_accessor :id, :name, :weekly_budget, :available_budget
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @name = options['name']
     @weekly_budget = options['weekly_budget'].to_f
-    @reset_to_this = @weekly_budget
+    @available_budget = options['available_budget'].to_f
   end
 
   def save()
-    sql = "INSERT INTO service_users(name, weekly_budget) VALUES($1, $2) RETURNING id"
-    values = [@name, @weekly_budget]
+    sql = "INSERT INTO service_users(name, weekly_budget, available_budget) VALUES($1, $2, $3) RETURNING id"
+    values = [@name, @weekly_budget, @available_budget]
     result = SqlRunner.run(sql,values)
     @id = result.first['id'].to_i
   end
 
   def update()
-    sql = "UPDATE service_users SET (name, weekly_budget) = ($1, $2) WHERE id = $3"
-    values = [@name, @weekly_budget, @id]
+    sql = "UPDATE service_users SET (name, weekly_budget, available_budget) = ($1, $2, $3) WHERE id = $4"
+    values = [@name, @weekly_budget, @available_budget, @id]
     SqlRunner.run(sql, values)
   end
 
@@ -47,26 +47,31 @@ class ServiceUser
   end
 
   def can_afford?(amount)
-    return @weekly_budget - amount > 0
+    return @available_budget - amount > 0
   end
 
   def reduce_budget(visit_id)
     visit = Visit.find(visit_id)
-    @weekly_budget -= visit.get_cost()
+    @available_budget -= visit.get_cost()
     update()
   end
 
   def increase_budget(visit_id)
     visit = Visit.find(visit_id)
-    @weekly_budget += visit.get_cost()
+    @available_budget += visit.get_cost()
     update()
   end
 
-  def get_budget_from_database()
-    sql = "SELECT weekly_budget FROM service_users WHERE id = $1"
-    values = [@id]
-    result = SqlRunner.run(sql, values)
-    return result.first['weekly_budget']
+  def cost_of_all_visits()
+    total_cost = 0
+    for visit in visits()
+      total_cost += visit.get_cost()
+    end
+    return total_cost
+  end
+
+  def percentage_of_weekly_budget_used()
+    return (100*@available_budget/@weekly_budget).to_i
   end
 
   def self.all()

@@ -7,19 +7,22 @@ Worker.delete_all()
 
 service_user_1 = ServiceUser.new({
   'name' => 'M. Stephens',
-  'weekly_budget' => 800
+  'weekly_budget' => 800,
+  'available_budget' => 800
   })
 service_user_1.save()
 
 service_user_2 = ServiceUser.new({
   'name' => 'C. Henry',
-  'weekly_budget' => 1500
+  'weekly_budget' => 1500,
+  'available_budget' => 1500
   })
 service_user_2.save()
 
 service_user_3 = ServiceUser.new({
   'name' => 'D. Mitchell',
-  'weekly_budget' => 90
+  'weekly_budget' => 90,
+  'available_budget' => 90
   })
 service_user_3.save()
 

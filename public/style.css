@@ -10,120 +10,6 @@ h1{
   font-size: 2.3em;
 }
 
-/*
-body {
-	height: 100%;
-	margin: 0;
-	width: 100%;
-  font-family:
-    Palatino,
-    serif;
-  background-color: #e6f2ff;
-}
-
-h1 {
-  font-size: 40px;
-  opacity: 0.6;
-}
-
-h6 {
-  position: fixed;
-  right: 10px;
-}
-
-img {
-  border: 3px solid #e6f2ff;
-}
-
-p {
-  border-radius: 50px;
-  padding: 15px;
-  width: 650px;
-  margin: 0 auto;
-  background-color: white;
-  position: relative;
-  top: 20px;
-}
-
-/* Top of the page */
-/*
-.centre {
-  text-align: center;
-}
-
-.top {
-  text-align: center;
-  padding-top: 70px;
-  padding-bottom: 500px;
-  background: linear-gradient(white, #e6f2ff);
-}
-
-.top a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.top h1 {
-  opacity: 1;
-}
-
-/* A section's standard layout. */
-
-/* .standard {
-  text-align: center;
-  padding-top: 20px;
-  padding-bottom: 500px;
-}
-
-/* Bottom of the page */
-/*
-.end {
-  text-align: center;
-  padding-top: 20px;
-  padding-bottom: 520px;
-} */
-
-/* Buttons */
-
-/* .greyButton a {
-  background-color: #e6f2ff;
-  border-radius: 40%;
-  font-weight: bold;
-  padding: 6px;
-  opacity: 0.6;
-  transition: 0.3s;
-}
-
-.greyButton a:hover {
-  opacity: 1;
-  background-color: white;
-}
-
-.whiteButton a {
-  background-color: white;
-  border-radius: 40%;
-  opacity: 0.6;
-  transition: 0.3s;
-  color: inherit;
-  text-decoration: none;
-}
-
-.whiteButton a:hover {
-  opacity: 1;
-  background-color: #e6f2ff;
-}
-
-.whiteButton h1 a{
-  padding: 12px;
-  position: relative;
-  top: 20px;
-}
-
-.whiteButton h3 a{
-  padding: 8px;
-}  */
-/* Navigation and copyright. */
-
 header {
   height: 45px;
 }
@@ -173,6 +59,8 @@ line-height: 45px;
   list-style-type:none;
 
 }
+
+
 
 .optionsHorizontal li{
   display: inline;
@@ -265,6 +153,43 @@ line-height: 45px;
   text-align: center;
 }
 
+
+.all-rounded {
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+}
+
+.spacer {
+      display: block;
+  }
+
+#progress-bar {
+    color: white;
+    width: 40em;
+    background: #cccccc;
+    display: block;
+    margin-top: 2em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#progress-bar-percentage {
+    background: #3063A5;
+    padding: 5px 0px; */
+    color: #FFF;
+    text-align: center;
+    height: 2em;
+}
+
+#progress-bar-percentage span {
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
+
+
 .centreimage {
   padding-top: 3em;
   padding-bottom: 2em;
@@ -304,12 +229,6 @@ input[type=submit] {
       cursor:pointer;
   font-size: inherit;
   font-weight: bold;
-    /* padding:5px 15px;
-    background:#ccc;
-    border:0 none;
-    cursor:pointer;
-    -webkit-border-radius: 5px;
-    border-radius: 5px; */
 }
 
 input[type=submit]:hover {

@@ -18,3 +18,9 @@ get '/admin' do
   @workers = Worker.all()
   erb(:admin)
 end
+
+# ABOUT SELF DIRECTED SUPPORT
+
+get '/about' do
+  erb(:about)
+end

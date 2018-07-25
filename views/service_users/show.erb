@@ -1,17 +1,26 @@
-<h1><%= @service_user.name() %></h1>
-<h2>Weekly Budget: £<%= @service_user.get_budget_from_database() %></h2>
+<title>Account Details</title>
 
-  <a href="/service_users/<%=@service_user.id%>/edit">EDIT</a>
+<div class="page-heading">
+<h1>Account details for <%= @service_user.name() %></h1>
+</div>
+
+<h2>Weekly Budget: £<%=@service_user.available_budget()%>/£<%= @service_user.weekly_budget() %>used</h2>
+
+
+<div id="progress-bar" class="all-rounded">
+    <div id="progress-bar-percentage" class="all-rounded" style="width: <%=@service_user.percentage_of_weekly_budget_used()%>%"><span><%=@service_user.percentage_of_weekly_budget_used()%>%</span></div>
+</div>
+
+
+<div class="greyButtonSmall">
+  <a href="/service_users/show_edit_or_delete?service_user_id=<%=@service_user.id()%>">Edit or delete account</a>
+</div>
+
 
   <a href="/service_users/show_search_options?service_user_id=<%=@service_user.id()%>">SEARCH FOR A WORKER</a>
 
-  <form action="/service_users/<%=@service_user.id%>/delete" method="POST">
-    <input type="submit" value="DELETE">
-  </form>
-  <div class="profile-page">
 
-    </section>
-    <section>
+  <div class="profile-page">
 
 
       <p>Next visits:</p>

@@ -76,7 +76,6 @@ get '/workers/search_results/fuzzy_search' do
   @found_workers = Worker.fuzzy_search(params['query'])
   @found_workers = Worker.sort_by_cost(@found_workers)
   @found_workers = Worker.remove_unapproved(@found_workers)
-
   @service_user = ServiceUser.find(params['service_user_id'])
   erb(:"workers/search_results")
 end
@@ -84,9 +83,9 @@ end
 # FILTERED SEARCH
 
 get '/workers/search_results/filtered_search' do
-   p params
   @found_workers = Worker.filtered_search(params['gender'],params['can-drive'], params['max-hourly'], params['experience'])
   @found_workers = Worker.sort_by_cost(@found_workers)
+  @found_workers = Worker.remove_unapproved(@found_workers)
   @service_user = ServiceUser.find(params['service_user_id'])
   erb(:"workers/search_results")
 end

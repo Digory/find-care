@@ -38,10 +38,19 @@ get '/service_users/fuzzy_search' do
   erb(:"service_users/fuzzy_search")
 end
 
+# SHOW EDIT OR DELETE
+
+get '/service_users/show_edit_or_delete' do
+  @service_user = ServiceUser.find(params['service_user_id'])
+  erb(:"service_users/show_edit_or_delete")
+end
+
 # CREATE
 
 post '/service_users' do
-  ServiceUser.new(params).save()
+  service_user = ServiceUser.new(params)
+  service_user.available_budget = service_user.weekly_budget
+  service_user.save()
   redirect to "/service_users"
 end
 
@@ -63,6 +72,7 @@ end
 
 post '/service_users/:id' do
   service_user = ServiceUser.new(params)
+  service_user.available_budget = service_user.weekly_budget
   service_user.update()
   redirect to "/service_users/#{service_user.id()}"
 end

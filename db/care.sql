@@ -5,7 +5,8 @@ DROP TABLE IF EXISTS workers;
 CREATE TABLE service_users(
   id SERIAL8 PRIMARY KEY,
   name VARCHAR(255),
-  weekly_budget DECIMAL(8,2)
+  weekly_budget DECIMAL(8,2),
+  available_budget DECIMAL(8,2)
 );
 
 CREATE TABLE workers(
