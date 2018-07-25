@@ -222,6 +222,13 @@ list-style-type: none;
   margin: auto;
 }
 
+.profileimage img{
+  padding-top: 0.8em;
+  width: 25%;
+  display: block;
+  margin: auto;
+}
+
 /* .form-section {
   display: flex;
   justify-content: space-between;
