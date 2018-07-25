@@ -1,19 +1,26 @@
-<h2> What days would you like to book <%=@worker.name()%> for?</h2>
+<title>Request booking</title>
+<div class="page-heading">
+<h1>What days would you like to book <%=@worker.name()%> for?</h1>
+</div>
 
+<div id="maincontent">
+<div class="profile-page-section">
+  <div class="options"><ul>
 <form action="/workers/confirm_booking?worker_id=<%=@worker.id()%>&service_user_id=<%=@service_user.id()%>" method="POST">
-  <h3>Days of the week<h3>
-<input type="checkbox" name="visit_days[]" value="Monday">Monday<br>
-<input type="checkbox" name="visit_days[]" value="Tuesday">Tuesday<br>
-<input type="checkbox" name="visit_days[]" value="Wednesday">Wednesday<br>
-<input type="checkbox" name="visit_days[]" value="Thursday">Thursday<br>
-<input type="checkbox" name="visit_days[]" value="Friday">Friday<br>
-<input type="checkbox" name="visit_days[]" value="Saturday">Saturday<br>
-<input type="checkbox" name="visit_days[]" value="Sunday">Sunday<br>
-<h3>Time of day</h3>
-<input type="text" name="visit_time">
+<li><input type="checkbox" name="visit_days[]" value="Monday">Monday</li>
+<li><input type="checkbox" name="visit_days[]" value="Tuesday">Tuesday</li>
+<li><input type="checkbox" name="visit_days[]" value="Wednesday">Wednesday</li>
+<li><input type="checkbox" name="visit_days[]" value="Thursday">Thursday</li>
+<li><input type="checkbox" name="visit_days[]" value="Friday">Friday</li>
+<li><input type="checkbox" name="visit_days[]" value="Saturday">Saturday</li>
+<li><input type="checkbox" name="visit_days[]" value="Sunday">Sunday</li>
+<li><label for="time">Time of day:</label>
+<input id = "time" type="text" name="visit_time"></li>
+<li><label for="duration">For how long?</label>
+<input id="duration" type="number" name="duration"></li>
+<input type="submit" value="confirm request">
 
-<h3>For how many hours?</h3>
-<input type="number" name="duration">
-<input type="submit" value="confirm date">
-
-</form>
+</form></ul>
+</div>
+</div>
+</div>

@@ -1,6 +1,23 @@
-<h1>Results:</h1>
+<title>Search by keyword</title>
 
+<div class="page-heading">
+<h1>Search results</h1>
+</div>
+
+<div id="maincontent">
+<div class="profile-page-section">
+  <div class="options">
+  <div class="greyButtonSmall"><ul>
 <% for worker in @found_workers %>
-  <a href="/workers/view?worker_id=<%=worker.id()%>&service_user_id=<%=@service_user.id()%>">
-  <%= worker.name() %></a><br>
+  <li><a href="/workers/view?worker_id=<%=worker.id()%>&service_user_id=<%=@service_user.id()%>">
+  <%= worker.get_info() %></a></li>
   <% end %>
+</ul>
+</div></div>
+</div>
+  <div class="profile-page-section">
+  <div class="greyButtonSmall">
+  <a href="#" onclick="history.go(-1)">search again</a>
+  </div>
+  </div>
+</div>

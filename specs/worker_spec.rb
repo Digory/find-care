@@ -103,53 +103,53 @@ class WorkerTest < MiniTest::Test
     assert_equal(1, actual)
   end
 
-  def test_fuzzy_search__partial_word()
-    actual = Worker.fuzzy_search('irst').length()
+  def test_keyword_search__partial_word()
+    actual = Worker.keyword_search('irst').length()
     assert_equal(2, actual)
   end
 
-  def test_fuzzy_search__multiple_words()
-    actual = Worker.fuzzy_search('irst aid').length()
+  def test_keyword_search__multiple_words()
+    actual = Worker.keyword_search('irst aid').length()
     assert_equal(2, actual)
   end
 
-  def test_fuzzy_search__case_insensitive()
-    actual = Worker.fuzzy_search('aUTIsm').length()
+  def test_keyword_search__case_insensitive()
+    actual = Worker.keyword_search('aUTIsm').length()
     assert_equal(3, actual)
   end
 
-  def test_fuzzy_search__letters_wrong()
-    actual = Worker.fuzzy_search('syn language').length()
+  def test_keyword_search__letters_wrong()
+    actual = Worker.keyword_search('syn language').length()
     assert_equal(1, actual)
   end
 
-  def test_fuzzy_search__leading_spaces()
-    actual = Worker.fuzzy_search('  syn language').length()
+  def test_keyword_search__leading_spaces()
+    actual = Worker.keyword_search('  syn language').length()
     assert_equal(1, actual)
   end
 
-  def test_fuzzy_search__trailing_spaces()
-    actual = Worker.fuzzy_search('syn language  ').length()
+  def test_keyword_search__trailing_spaces()
+    actual = Worker.keyword_search('syn language  ').length()
     assert_equal(1, actual)
   end
 
-  def test_fuzzy_search__keywords_correct_word()
-    actual = Worker.fuzzy_search('driver').length()
+  def test_keyword_search__keywords_correct_word()
+    actual = Worker.keyword_search('driver').length()
     assert_equal(4, actual)
   end
 
-  def test_fuzzy_search__keywords_word_spelling_wrong()
-    actual = Worker.fuzzy_search('chep').length()
+  def test_keyword_search__keywords_word_spelling_wrong()
+    actual = Worker.keyword_search('chep').length()
     assert_equal(2, actual)
   end
 
-  def test_fuzzy_search__keywords_gender_spelling_wrong_1()
-    actual = Worker.fuzzy_search('mans').length()
+  def test_keyword_search__keywords_gender_spelling_wrong_1()
+    actual = Worker.keyword_search('mans').length()
     assert_equal(3, actual)
   end
 
-  def test_fuzzy_search__keywords_gender_spelling_wrong_2()
-    actual = Worker.fuzzy_search('wimen').length()
+  def test_keyword_search__keywords_gender_spelling_wrong_2()
+    actual = Worker.keyword_search('wimen').length()
     assert_equal(3, actual)
   end
 

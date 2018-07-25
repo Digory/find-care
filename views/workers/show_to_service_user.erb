@@ -1,5 +1,16 @@
+<title>Profile for: <%=@worker.name()%></title>
+
+<div class="page-heading">
 <h1>Profile for: <%=@worker.name()%></h1>
+</div>
 
+<div id="maincontent">
+<div class="profile-page-section">
+<div class="greyButtonSmall">
 <p><%=@worker.get_info()%><p>
-
+<div class="profile-page-section">
   <a href="/workers/book_worker?worker_id=<%=@worker.id()%>&service_user_id=<%=@service_user.id()%>">Book worker</a>
+</div>
+</div>
+</div>
+</div>

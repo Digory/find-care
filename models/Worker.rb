@@ -23,7 +23,7 @@ class Worker
     create_keywords_string() unless options['keywords']
   end
 
-  # The @keywords string will be used to help with the fuzzy search.
+  # The @keywords string will be used to help with the keyword search.
 
    def create_keywords_string()
   #   first_name = @name.slice(0..-4)
@@ -40,7 +40,12 @@ class Worker
   # end
 
   def get_info()
-    return "#{@name}, gender: #{@gender}, can drive: #{@can_drive}, hourly rate: £#{sprintf('%.2f', @hourly_rate)}, experience: #{@experience}"
+    info_string = "#{@name} is a "
+    add_to_string = (@gender == "m")? "male " : "female "
+    info_string += add_to_string
+    add_to_string = @can_drive? "driver." : "non-driver."
+    info_string += add_to_string + " experience: #{experience}. Hourly rate: £#{cost_to_employer()}"
+    return info_string
   end
 
   def approve()
@@ -156,7 +161,7 @@ class Worker
 
 #  For searching using the search bar, where a user may type words with the incorrect spelling.
 
-  def self.fuzzy_search(searched)
+  def self.keyword_search(searched)
     all_workers = self.all()
     return all_workers if searched.strip == ""
     found_workers = []

@@ -1,0 +1,17 @@
+<title>Search by keyword</title>
+
+<div class="page-heading">
+<h1>Search by keyword</h1>
+</div>
+
+<div id="maincontent">
+
+<div class="profile-page-section">
+  <form action="/workers/search_results/keyword_search" method="GET">
+    <!-- <label for="search-bar">Search:</label> -->
+    <input type="hidden" value="<%=@service_user.id()%>" name="service_user_id">
+    <input id="bigger-input" name="query" type="search" size="100" placeholder="search workers"/>
+    <input type="submit" value="SEARCH">
+  </form>
+</div>
+</div>

@@ -31,11 +31,11 @@ get '/service_users/filtered_search' do
   erb(:"service_users/filtered_search")
 end
 
-# SHOW FUZZY SEARCH
+# SHOW keyword SEARCH
 
-get '/service_users/fuzzy_search' do
+get '/service_users/keyword_search' do
   @service_user = ServiceUser.find(params['service_user_id'])
-  erb(:"service_users/fuzzy_search")
+  erb(:"service_users/keyword_search")
 end
 
 # SHOW EDIT OR DELETE

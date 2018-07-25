@@ -4,8 +4,15 @@
 <h1>Search options</h1>
 </div>
 
-<div class="greyButtonSmall">
-<a href="/service_users/fuzzy_search?service_user_id=<%=@service_user.id()%>">Search by keyword</a>
+<div id="maincontent">
 
+
+<div class="greyButtonSmall">
+<div class="profile-page-section">
+<a href="/service_users/keyword_search?service_user_id=<%=@service_user.id()%>">Search by keyword</a>
+</div>
+<div class="profile-page-section">
 <a href="/service_users/filtered_search?service_user_id=<%=@service_user.id()%>">Search by criteria</a>
+</div>
+</div>
 </div>

@@ -40,6 +40,15 @@ li a {
 line-height: 45px;
 }
 
+/* body {
+  font-size: 1em;
+}
+
+#bigger-input {
+  font-size: 2em;
+  height: 2rem;
+} */
+
 .page-heading h1{
   padding-top: 1em;
   width: 80%;
@@ -81,7 +90,7 @@ line-height: 45px;
 }
 
 .options li{
-  display: inline;
+  display: block;
    /* padding: 2em; */
 }
 
