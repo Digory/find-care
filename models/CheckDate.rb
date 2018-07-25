@@ -12,4 +12,8 @@ class CheckDate
     return Chronic.parse("next #{day_of_the_week} at #{time}")
   end
 
+  def self.get_words_from_date_and_time(date, time)
+    return DateTime.parse(date + " " + time).strftime("%A at %l:%M%P")
+  end
+
 end

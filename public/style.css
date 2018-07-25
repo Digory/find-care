@@ -40,8 +40,11 @@ li a {
 line-height: 45px;
 }
 
-.page-heading{
-  padding-top: 2em;
+.page-heading h1{
+  padding-top: 1em;
+  width: 80%;
+  margin: auto;
+  text-align: center;
 }
 
 .options{
@@ -143,7 +146,7 @@ line-height: 45px;
 .greyButtonSmall a:hover {
   opacity: 1;
   background-color: white;
-  border: 0.03em solid black;
+  border: 0.05em solid black;
 }
 
 
@@ -190,13 +193,12 @@ line-height: 45px;
 }
 
 
-.centreimage {
-  padding-top: 3em;
-  padding-bottom: 2em;
+.centreimage img{
+  padding-top: 1em;
+  padding-bottom: 1em;
+  width: 40%;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+  margin: auto;
 }
 
 .form-section {
@@ -218,6 +220,10 @@ line-height: 45px;
   width: 25px;
 }
 
+.profile-page{
+  padding-top: 2em;
+}
+
 input[type=submit] {
   background-color: #e6f2ff;
   border-radius: 50%;
@@ -234,5 +240,5 @@ input[type=submit] {
 input[type=submit]:hover {
   opacity: 1;
   background-color: white;
-  border: 0.03em solid black;
+  border: 0.05em solid black;
     }

@@ -35,9 +35,19 @@ class Visit
   #   return result.first['approved']
   # end
 
-  def get_details_for_service_user()
-    worker_cost = get_cost()
-    return "#{worker.name()} is coming on #{@visit_date} at #{@visit_time} for #{@duration} hours, at a cost of: £#{worker_cost}"
+  def next_visit_string()
+    # worker_cost = get_cost()
+    # return "#{worker.name()} is coming on #{@visit_date} at #{@visit_time} for #{@duration} hours, at a cost of: £#{worker_cost}"
+    date_and_time_string = CheckDate.get_words_from_date_and_time(@visit_date, @visit_time)
+    return "#{worker().name()} is coming on #{date_and_time_string} for #{@duration} hours."
+  end
+
+  def confirmed_visit_string()
+
+  end
+
+  def unconfirmed_visit_string()
+    return
   end
 
   def get_details_for_worker()
@@ -63,6 +73,7 @@ class Visit
     sql = "UPDATE visits SET visit_date = visit_date + 7 WHERE id = $1"
     values = [@id]
     SqlRunner.run(sql, values)
+    @visit_date = get_database_visit_date()
   end
 
   def save()

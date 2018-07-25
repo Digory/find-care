@@ -4,12 +4,29 @@
 <h1>Account details for <%= @service_user.name() %></h1>
 </div>
 
-<h2>Weekly Budget: £<%=@service_user.available_budget()%>/£<%= @service_user.weekly_budget() %>used</h2>
-
-
 <div id="progress-bar" class="all-rounded">
     <div id="progress-bar-percentage" class="all-rounded" style="width: <%=@service_user.percentage_of_weekly_budget_used()%>%"><span><%=@service_user.percentage_of_weekly_budget_used()%>%</span></div>
 </div>
+
+<div id="maincontent">
+    <div class="profile-page">
+      <p>You are currently using <strong>£<%=@service_user.string_value_of_weekly_budget_used()%></strong> of your weekly budget of <strong>£<%=@service_user.string_value_of_weekly_budget()%></strong></p>
+
+      <div class="options">
+      <p>Confirmed visits:</p>
+      <% for visit in @service_user.visits() %>
+      <% while CheckDate.is_in_past?(visit.get_database_visit_date(), visit.get_database_visit_time()) %>
+      <% visit.increase_date_by_a_week() %>
+      <% end %>
+        <p><%=visit.next_visit_string()%> approved = <%=visit.approved()%></p>
+        <% end %>
+      </div>
+<% p @service_user.sort_visits_by_date()%>
+
+      <p>Your workers:</p>
+      <% for worker in @service_user.workers() %>
+        <a href="/workers/view?worker_id=<%=worker.id()%>&service_user_id=<%=@service_user.id()%>"><%=worker.name()%></a>
+        <% end %>
 
 
 <div class="greyButtonSmall">
@@ -20,19 +37,6 @@
   <a href="/service_users/show_search_options?service_user_id=<%=@service_user.id()%>">SEARCH FOR A WORKER</a>
 
 
-  <div class="profile-page">
-
-
-      <p>Next visits:</p>
-      <% for visit in @service_user.visits() %>
-      <% while CheckDate.is_in_past?(visit.get_database_visit_date(), visit.get_database_visit_time()) %>
-      <% visit.increase_date_by_a_week() %>
-      <% end %>
-        <p><%=visit.get_details_for_service_user()%> approved = <%=visit.approved()%></p>
-        <% end %>
-
-      <p>Your workers:</p>
-      <% for worker in @service_user.workers() %>
-        <a href="/workers/view?worker_id=<%=worker.id()%>&service_user_id=<%=@service_user.id()%>"><%=worker.name()%></a>
-        <% end %>
     </div>
+
+  </div>
