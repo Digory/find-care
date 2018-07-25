@@ -58,6 +58,12 @@ end
 
 get '/service_users/:id' do
   @service_user = ServiceUser.find(params['id'])
+  for visit in @service_user.visits()
+    while CheckDate.is_in_past?(visit.get_database_visit_date(), visit.get_database_visit_time())
+      visit.increase_date_by_a_week()
+    end
+  end
+  @visits = @service_user.sort_visits_by_date()
   erb(:"service_users/show")
 end
 

@@ -7,7 +7,7 @@ class Worker
 
   attr_accessor :id, :name, :gender, :can_drive, :hourly_rate, :experience, :approved, :keywords
 
-  $cost_multiplier = 1.2
+  $cost_multiplier = 1.28
 
   def initialize(options)
     @id = options['id'].to_i if options['id']

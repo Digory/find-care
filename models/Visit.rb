@@ -35,19 +35,17 @@ class Visit
   #   return result.first['approved']
   # end
 
-  def next_visit_string()
-    # worker_cost = get_cost()
-    # return "#{worker.name()} is coming on #{@visit_date} at #{@visit_time} for #{@duration} hours, at a cost of: £#{worker_cost}"
-    date_and_time_string = CheckDate.get_words_from_date_and_time(@visit_date, @visit_time)
-    return "#{worker().name()} is coming on #{date_and_time_string} for #{@duration} hours."
+  # def next_visit_string()
+  #   date_and_time_string = CheckDate.get_words_from_date_and_time(@visit_date, @visit_time)
+  #   return "#{worker().name()} is coming on #{date_and_time_string} for #{@duration} hours."
+  # end
+
+  def normal_visit_string()
+    return "#{worker.name()} is coming on #{DateTime.parse(@visit_date + " " + @visit_time).strftime("%A %B %-d at %l:%M%P")} for #{@duration} hours."
   end
 
-  def confirmed_visit_string()
-
-  end
-
-  def unconfirmed_visit_string()
-    return
+  def add_to_normal_visit_string()
+    return (approved()? "" : " &#8592 Awaiting confirmation.")
   end
 
   def get_details_for_worker()

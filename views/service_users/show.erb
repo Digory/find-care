@@ -10,31 +10,46 @@
 
 <div id="maincontent">
     <div class="profile-page">
-      <p>You are currently using <strong>£<%=@service_user.string_value_of_weekly_budget_used()%></strong> of your weekly budget of <strong>£<%=@service_user.string_value_of_weekly_budget()%></strong></p>
+      <p>You are currently using <strong>£<%=@service_user.string_value_of_weekly_budget_used()%></strong>, or <strong><%=@service_user.percentage_of_weekly_budget_used()%>%</strong>, of your weekly budget of <strong>£<%=@service_user.string_value_of_weekly_budget()%></strong></p>
 
+      <div class="profile-page-section">
+        <h3>All visits</h3>
+      <% for visit in @visits %>
+        <p><%=visit.normal_visit_string()%><strong><%=visit.add_to_normal_visit_string()%></strong></p>
+        <% end %>
+    </div>
+
+    <div class="profile-page-section">
+      <h3>Your workers</h3>
       <div class="options">
-      <p>Confirmed visits:</p>
-      <% for visit in @service_user.visits() %>
-      <% while CheckDate.is_in_past?(visit.get_database_visit_date(), visit.get_database_visit_time()) %>
-      <% visit.increase_date_by_a_week() %>
-      <% end %>
-        <p><%=visit.next_visit_string()%> approved = <%=visit.approved()%></p>
-        <% end %>
-      </div>
-<% p @service_user.sort_visits_by_date()%>
-
-      <p>Your workers:</p>
+      <div class="greyButtonSmall">
+        <ul>
       <% for worker in @service_user.workers() %>
-        <a href="/workers/view?worker_id=<%=worker.id()%>&service_user_id=<%=@service_user.id()%>"><%=worker.name()%></a>
+        <li><a href="/workers/view?worker_id=<%=worker.id()%>&service_user_id=<%=@service_user.id()%>"><%=worker.name()%></a></li>
         <% end %>
+      </ul>
+    </div>
+      </div>
+    </div>
+<!--
+    <div class="profile-page-section">
+  <a href="/service_users/show_search_options?service_user_id=<%=@service_user.id()%>">Search for a worker</a>
+    </div> -->
 
+    <div class="profile-page-section">
+      <h3>Options</h3>
+    <div class="optionsHorizontal">
 
-<div class="greyButtonSmall">
+<div class="greyButtonLarge">
+
+          <a href="/service_users/show_search_options?service_user_id=<%=@service_user.id()%>">Search for a worker</a>
+
   <a href="/service_users/show_edit_or_delete?service_user_id=<%=@service_user.id()%>">Edit or delete account</a>
+</div>
+</div>
 </div>
 
 
-  <a href="/service_users/show_search_options?service_user_id=<%=@service_user.id()%>">SEARCH FOR A WORKER</a>
 
 
     </div>

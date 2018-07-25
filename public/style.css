@@ -48,7 +48,7 @@ line-height: 45px;
 }
 
 .options{
-  padding-top: 1.5em;
+  padding-top: 0.8em;
   font-size: 1em;
 }
 
@@ -95,6 +95,14 @@ line-height: 45px;
   color: inherit;
   text-decoration: none;
 }
+
+/* .workers-list{
+  position: absolute;
+  left: 150px;
+  width: 200px;
+  height: 120px;
+  border: 3px solid green;
+} */
 
 .whiteButton a {
   background-color: white;
@@ -222,6 +230,14 @@ line-height: 45px;
 
 .profile-page{
   padding-top: 2em;
+}
+
+.profile-page-section{
+  padding-top: 2em;
+}
+
+.profile-page-section p{
+  padding-top: 1em;
 }
 
 input[type=submit] {
