@@ -63,6 +63,11 @@ class Worker
   def approved_string()
     return (@approved? "" : "AWAITING ADMIN APPROVAL")
   end
+
+  def hours_afforded(service_user)
+    # service_user = ServiceUser.find(service_user_id)
+    return (service_user.available_budget/(@hourly_rate*$cost_multiplier)).to_i
+  end
   #
   # def check_database_for_approved()
   #   sql = "SELECT approved FROM workers WHERE id = $1"
