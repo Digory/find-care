@@ -1,7 +1,18 @@
-<form class="form-overall" action="/workers/search_results/filtered_search" method="GET">
+<title>Search by criteria</title>
+
+<div class="page-heading">
+<h1>Search by criteria</h1>
+</div>
+
+<div id="maincontent">
+
+<div class="profile-page-section">
+<div class="options">
+<ul>
+<form action="/workers/search_results/filtered_search" method="GET">
   <input type="hidden" value="<%=@service_user.id()%>" name="service_user_id">
-  <h1>Gender</h1>
-  <div class="form-section">
+  <h3>Gender</h3>
+  <li>
     <div class="radio-button">
       <input type="radio" name="gender" value="m"><label for="gender">Male</label>
     </div>
@@ -11,24 +22,24 @@
     <div class="radio-button">
       <input type="radio" name="gender" value="a" checked>any
     </div>
-  </div>
+  </li>
   <h3>Driving status</h3>
-  <div class="form-section">
+  <li>
 
     <input type="radio" name="can-drive" value="t">can drive
     <input type="radio" name="can-drive" value="a" checked>no preference
-  </div>
+  </li>
   <h3>Max hourly cost to me</h3>
-  <div class="form-section">
+  <li>
 
     <input type="radio" name="max-hourly" value="10">£10
     <input type="radio" name="max-hourly" value="12">£12
     <input type="radio" name="max-hourly" value="14">£14
     <input type="radio" name="max-hourly" value="16">£16
     <input type="radio" name="max-hourly" value="1000" checked>any
-  </div>
+  </li>
   <h3>Experience</h3>
-  <div class="form-section">
+  <li>
 
     <input type="checkbox" name="experience[]" value="Autism">Autism
     <input type="checkbox" name="experience[]" value="Sign Language">Sign Language
@@ -39,6 +50,12 @@
     <input type="checkbox" name="experience[]" value="Peg Feeding">Peg Feeding
     <input type="checkbox" name="experience[]" value="Children">Children
     <input type="checkbox" name="experience[]" value="any" checked>Any
-  </div>
+  </li>
+</div>
+</div>
+<div class="profile-page-section">
   <input type="submit" value="SEARCH FOR THESE CRITERIA">
+</div>
 </form>
+</ul>
+</div>
