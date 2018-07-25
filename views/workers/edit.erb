@@ -1,30 +1,42 @@
-<h1>Edit worker</h1>
+<title>Edit account</title>
 
+<div class="page-heading">
+<h1>Edit account</h1>
+</div>
+
+
+<div id="maincontent">
+<div class="options"><ul>
 <form method="POST" action="/workers/<%=@worker.id%>">
-  <label for="worker-name">Name of worker:</label>
-  <input id="worker-name" type="text" name="name" value="<%=@worker.name()%>">
-  <label for="worker-gender">Gender:</label>
+  <li><label for="worker-name">Name of worker:</label>
+  <input id="worker-name" type="text" name="name" value="<%=@worker.name()%>"></li>
+  <li><label for="worker-gender">Gender:</label>
   <select id="worker-gender" name="gender">
 
     <option value="m" <%= "selected" if @worker.gender() == "m"%>>male</option>
 
     <option value="f" <%= "selected" if @worker.gender() == "f"%>>female</option>
 
-  </select>
+    <option value="a" <%= "selected" if @worker.gender() == "a"%>>prefer not to say</option>
 
-  <label for="worker-can-drive">Can you drive?</label>
+  </select></li>
+
+  <li><label for="worker-can-drive">Can you drive?</label>
   <select id="worker-can-drive" name="can_drive">
 
     <option value="true" <%= "selected" if @worker.can_drive() == "t"%>>yes</option>
 
     <option value="false" <%= "selected" if @worker.can_drive() == "f"%>>no</option>
 
-  </select>
+  </select></li>
 
-  <label for="hourly-rate">Hourly rate:</label>
-  <input id="hourly-rate" type="text" name="hourly_rate" value="<%=@worker.hourly_rate()%>">
-  <label for="worker-experience">Experience:</label>
-  <input id="worker-experience" type="text" name="experience" value="<%=@worker.experience()%>">
+  <li><label for="hourly-rate">Hourly rate:</label>
+  <input id="hourly-rate" type="text" name="hourly_rate" value="<%=@worker.hourly_rate()%>"><li>
+<li>  <label for="worker-experience">Experience:</label>
+  <input id="worker-experience" type="text" name="experience" value="<%=@worker.experience()%>"></li>
 
     <input type="submit" value="Update worker">
-</form>
+</form></ul>
+</div>
+
+</div>

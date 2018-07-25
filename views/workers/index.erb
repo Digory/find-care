@@ -1,11 +1,24 @@
-<h1>Workers</h1>
+<title>Support Worker login</title>
 
 
+<div class="page-heading">
+<h1>Support Worker login</h1>
+</div>
 
-  <% for worker in @workers %>
-  <p> <a href="/workers/<%=worker.id()%>"><%= worker.get_info() %></a></p>
-  <% end %>
+<div class="options" id="maincontent">
+<div class="greyButtonSmall">
+<ul>
+    <% for worker in @workers %>
+<li><%=worker.name()%> &#8594 <a href="/workers/<%=worker.id()%>"> view your account </a>
+</li>
+<% end %>
+</ul>
+</div>
 
-  <br>
 
-  <a href="/workers/new">APPLY TO BECOME A SUPPORT WORKER</a>
+<div class="optionsPageBottom">
+  <div class="greyButtonLarge">
+  <a href="/workers/new"><strong>Apply to become a Support Worker</strong></a>
+</div>
+</div>
+</div>

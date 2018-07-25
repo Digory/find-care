@@ -50,7 +50,7 @@ class Visit
 
   def get_details_for_worker()
     service_user = ServiceUser.find(@service_user_id)
-    return "You are supporting #{service_user.name()} on #{@visit_date} at #{@visit_time} for #{@duration} hours."
+    return "You are supporting #{service_user.name()} on #{@visit_date} at #{@visit_time[0..4]} for #{@duration} hours."
   end
 
   def get_database_visit_date()

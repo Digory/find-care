@@ -1,7 +1,28 @@
-<%for worker in @unapproved_workers %>
-<%=worker.name() %>
-<form method="POST" action="/workers/approve?worker_id=<%=worker.id()%>">
-<input type="submit" value="Approve worker">
-</form>
+<title>Approve workers</title>
 
-<%end%>
+<div class="page-heading">
+<h1>Approve workers</h1>
+</div>
+
+  <div id="maincontent">
+<div class="options"><ul>
+  <%for worker in @unapproved_workers %>
+  <li><%=worker.get_info() %>
+  <form method="POST" action="/workers/approve?worker_id=<%=worker.id()%>">
+  <input type="submit" value="Approve worker"></li>
+  </form>
+  <%end%>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+<!-- # <%for worker in @unapproved_workers %>
+# <%=worker.name() %>
+# <form method="POST" action="/workers/approve?worker_id=<%=worker.id()%>">
+# <input type="submit" value="Approve worker">
+# </form>
+#
+# <%end%> -->

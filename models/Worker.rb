@@ -41,7 +41,14 @@ class Worker
 
   def get_info()
     info_string = "#{@name} is a "
-    add_to_string = (@gender == "m")? "male " : "female "
+    case @gender
+    when "m"
+      add_to_string = "male "
+    when "f"
+      add_to_string = "female "
+    when "a"
+      add_to_string = "non-binary "
+    end
     info_string += add_to_string
     add_to_string = @can_drive? "driver." : "non-driver."
     info_string += add_to_string + " experience: #{experience}. Hourly rate: £#{cost_to_employer()}"

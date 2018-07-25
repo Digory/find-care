@@ -1,28 +1,47 @@
-<h1>Worker detailed info:</h1>
+<title>Profile for: <%=@worker.name()%></title>
 
-<h2><%=@worker.get_info()%></h2>
+<div class="page-heading">
+<h1>Profile for: <%=@worker.name()%></h1>
+</div>
 
-<a href="/workers/<%=@worker.id()%>/edit">EDIT</a>
-
-<form method="POST" action="/workers/<%=@worker.id%>/delete">
-  <input type="submit" value="DELETE"/>
-</form>
-
-<h3>your schedule:</h3>
-<% for visit in @worker.visits() %>
-<% while CheckDate.is_in_past?(visit.get_database_visit_date(), visit.get_database_visit_time()) %>
-<% visit.increase_date_by_a_week() %>
-<% end %>
-  <p><%=visit.get_details_for_worker()%></p>
-  <% if visit.approved() == false %>
-  <%= "can you do this visit?" %>
-    <form method="POST" action="/visits/<%=visit.id()%>/approve">
-      <input type="hidden" name="worker_id" value="<%=@worker.id()%>">
-      <input type="submit" value="YES"/>
-    </form>
-    <form method="POST" action="/visits/<%=visit.id()%>/delete">
-      <input type="hidden" name="worker_id" value="<%=@worker.id()%>">
-      <input type="submit" value="NO"/>
-    </form>
-    <% end %>
+<div id="maincontent">
+<div class="profile-page-section">
+  <p><%=@worker.get_info()%></p>
+  <div class="options">
+<div class="greyButtonSmall">
+<ul>
+  <h3>your schedule:</h3>
+  <% for visit in @worker.visits() %>
+  <% while CheckDate.is_in_past?(visit.get_database_visit_date(), visit.get_database_visit_time()) %>
+  <% visit.increase_date_by_a_week() %>
   <% end %>
+    <li><%=visit.get_details_for_worker()%>
+    <% if visit.approved() == false %>
+    <%= "can you do this visit?" %>
+      <form method="POST" action="/visits/<%=visit.id()%>/approve">
+        <input type="hidden" name="worker_id" value="<%=@worker.id()%>">
+        <input type="submit" value="YES"/>
+      </form>
+      <form method="POST" action="/visits/<%=visit.id()%>/delete">
+        <input type="hidden" name="worker_id" value="<%=@worker.id()%>">
+        <input type="submit" value="NO"/>
+      </form></li>
+      <% end %>
+    <% end %>
+  </ul>
+
+
+</div>
+</div>
+</div>
+
+<div class="profile-page-section">
+  <div class"options">
+    <div class="greyButtonSmall"><ul>
+<a href="/workers/<%=@worker.id()%>/edit">Edit account information</a>
+<form method="POST" action="/workers/<%=@worker.id%>/delete">
+  <input type="submit" value="Delete account"/>
+</form>
+</ul>  </div></div>
+</div>
+</div>

@@ -21,8 +21,14 @@ end
 # CREATE
 
 post '/workers' do
-  Worker.new(params).save()
-  redirect to "workers/new_success"
+  worker = Worker.new(params)
+  experience_string = ""
+  for experience in params['experience']
+    experience_string += experience + ","
+  end
+  worker.experience = experience_string
+  worker.save()
+  erb(:"workers/new_success")
 end
 
 # APPROVE

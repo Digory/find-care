@@ -78,6 +78,9 @@ end
 
 post '/service_users/:id' do
   service_user = ServiceUser.new(params)
+  for visit in service_user.visits()
+    visit.delete()
+  end
   service_user.available_budget = service_user.weekly_budget
   service_user.update()
   redirect to "/service_users/#{service_user.id()}"
