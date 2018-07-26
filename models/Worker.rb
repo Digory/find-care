@@ -167,7 +167,7 @@ class Worker
     found_workers = []
     for worker in self.all()
       if worker.gender() == gender || gender == "a"
-        if worker.can_drive() == "t" || can_drive == "a"
+        if worker.can_drive() == true || can_drive == "a"
           if worker.hourly_rate() <= max_hourly_rate.to_f/$cost_multiplier
             if worker.does_experience_match_all_filters?(searched_array)
               found_workers << worker
