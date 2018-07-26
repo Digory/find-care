@@ -31,10 +31,21 @@ get '/service_users/filtered_search' do
   erb(:"service_users/filtered_search")
 end
 
-# SHOW keyword SEARCH
+# SHOW keyword SEARCH before searching
 
 get '/service_users/keyword_search' do
   @service_user = ServiceUser.find(params['service_user_id'])
+  erb(:"service_users/keyword_search")
+end
+
+# SHOW keyword SEARCH after searching
+
+post '/service_users/keyword_search' do
+  @found_workers = Worker.keyword_search(params['query'])
+  @found_workers = Worker.sort_by_cost(@found_workers)
+  @found_workers = Worker.remove_unapproved(@found_workers)
+  @service_user = ServiceUser.find(params['service_user_id'])
+  # @service_user = ServiceUser.find(params['service_user_id'])
   erb(:"service_users/keyword_search")
 end
 

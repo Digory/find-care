@@ -7,11 +7,26 @@
 <div id="maincontent">
 
 <div class="profile-page-section">
-  <form action="/workers/search_results/keyword_search" method="GET">
+  <form action="/service_users/keyword_search" method="POST">
     <!-- <label for="search-bar">Search:</label> -->
     <input type="hidden" value="<%=@service_user.id()%>" name="service_user_id">
     <input id="bigger-input" name="query" type="search" size="100" placeholder="search workers"/>
     <input type="submit" value="SEARCH">
   </form>
 </div>
+
+<div class="profile-page-section">
+  <div class="options">
+  <div class="greyButtonSmall"><ul>
+    <% if @found_workers %>
+<% for worker in @found_workers%>
+  <li><a href="/workers/view?worker_id=<%=worker.id()%>&service_user_id=<%=@service_user.id()%>">
+  <%= worker.get_info()%></a></li>
+  <li>you can afford <%=worker.hours_afforded(@service_user)%> hours</li>
+  <% end %>
+  <% end %>
+</ul>
+</div></div>
+</div>
+
 </div>

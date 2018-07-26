@@ -51,9 +51,13 @@ class Worker
     end
     info_string += add_to_string
     add_to_string = @can_drive? "driver." : "non-driver."
-    info_string += add_to_string + " experience: #{experience}. Hourly rate: £#{cost_to_employer()}"
+    info_string += add_to_string + " Experience: #{@experience}. Hourly rate: £#{cost_to_employer()}"
     return info_string
   end
+
+  # def experience_string()
+  #   return @experience.gsub(","," ")
+  # end
 
   def approve()
     @approved = true
