@@ -24,7 +24,11 @@
   <%= worker.get_info()%></a></li>
   <li>you can afford <%=worker.hours_afforded(@service_user)%> hours</li>
   <% end %>
+  <% if @found_workers.empty?%>
+  <p>No results found.</p>
   <% end %>
+  <% end %>
+  <li><a href="/service_users/show_search_options?service_user_id=<%=@service_user.id()%>">Back to search options</a></li>
 </ul>
 </div></div>
 </div>

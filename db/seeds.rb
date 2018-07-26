@@ -27,7 +27,7 @@ service_user_3 = ServiceUser.new({
 service_user_3.save()
 
 worker_1 = Worker.new({
-  'name' => 'James',
+  'name' => 'Carlos',
   'gender' => 'm',
   'can_drive' => "t",
   'hourly_rate' => 10.50,
