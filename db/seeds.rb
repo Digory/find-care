@@ -7,22 +7,22 @@ Worker.delete_all()
 
 service_user_1 = ServiceUser.new({
   'name' => 'M. Stephens',
-  'weekly_budget' => 800,
-  'available_budget' => 800
+  'weekly_budget' => 300,
+  'available_budget' => 300
   })
 service_user_1.save()
 
 service_user_2 = ServiceUser.new({
   'name' => 'C. Henry',
-  'weekly_budget' => 1500,
-  'available_budget' => 1500
+  'weekly_budget' => 100,
+  'available_budget' => 100
   })
 service_user_2.save()
 
 service_user_3 = ServiceUser.new({
   'name' => 'D. Mitchell',
-  'weekly_budget' => 90,
-  'available_budget' => 90
+  'weekly_budget' => 500,
+  'available_budget' => 500
   })
 service_user_3.save()
 
@@ -54,7 +54,7 @@ worker_3 = Worker.new({
 worker_3.save()
 
 worker_4 = Worker.new({
-  'name' => 'Jenna',
+  'name' => 'Jennifer',
   'gender' => 'f',
   'can_drive' => true,
   'hourly_rate' => 8.50,
@@ -67,7 +67,7 @@ worker_5 = Worker.new({
   'gender' => 'm',
   'can_drive' => false,
   'hourly_rate' => 9.00,
-  'experience' => ''
+  'experience' => 'none'
   })
 worker_5.save()
 
@@ -79,6 +79,60 @@ worker_6 = Worker.new({
   'experience' => 'Autism,Food Hygiene,First Aid'
   })
 worker_6.save()
+
+worker_7 = Worker.new({
+  'name' => 'Barbara',
+  'gender' => 'f',
+  'can_drive' => false,
+  'hourly_rate' => 12.00,
+  'experience' => 'Children'
+  })
+worker_7.save()
+
+worker_8 = Worker.new({
+  'name' => 'Scott',
+  'gender' => 'm',
+  'can_drive' => false,
+  'hourly_rate' => 10.00,
+  'experience' => 'Peg Feeding,Sign Language'
+  })
+worker_8.save()
+
+worker_8 = Worker.new({
+  'name' => 'Jade',
+  'gender' => 'f',
+  'can_drive' => true,
+  'hourly_rate' => 9.50,
+  'experience' => 'Children,Autism,Peg Feeding,Sign Language'
+  })
+worker_8.save()
+
+worker_8 = Worker.new({
+  'name' => 'Joe',
+  'gender' => 'm',
+  'can_drive' => false,
+  'hourly_rate' => 8.50,
+  'experience' => 'Sign Language'
+  })
+worker_8.save()
+
+worker_9 = Worker.new({
+  'name' => 'Sarah',
+  'gender' => 'f',
+  'can_drive' => false,
+  'hourly_rate' => 14.50,
+  'experience' => 'Children,Moving and Handling,Sign Language,First Aid,Visual Impairment'
+  })
+worker_9.save()
+
+worker_10 = Worker.new({
+  'name' => 'Simon',
+  'gender' => 'm',
+  'can_drive' => true,
+  'hourly_rate' => 13.50,
+  'experience' => 'Visual Impairment'
+  })
+worker_10.save()
 
 # visit_1 = Visit.new({
 #   'service_user_id' => service_user_1.id,

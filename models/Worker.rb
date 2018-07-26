@@ -13,7 +13,7 @@ class Worker
     @id = options['id'].to_i if options['id']
     @name = options['name']
     @gender = options['gender']
-    @can_drive = options['can_drive']
+    @can_drive = options['can_drive'] == 't'? true : false
     @hourly_rate = options['hourly_rate'].to_f
     @experience = options['experience']
 
