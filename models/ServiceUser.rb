@@ -13,6 +13,8 @@ class ServiceUser
     @available_budget = options['available_budget'].to_f
   end
 
+  # CRUD methods.
+
   def save()
     sql = "INSERT INTO service_users(name, weekly_budget, available_budget) VALUES($1, $2, $3) RETURNING id"
     values = [@name, @weekly_budget, @available_budget]
@@ -46,13 +48,31 @@ class ServiceUser
     return results.map{|visit_info| Visit.new(visit_info)}
   end
 
+  def self.all()
+    sql = "SELECT * FROM service_users"
+    results = SqlRunner.run(sql)
+    return results.map{|service_user_info| ServiceUser.new(service_user_info)}
+  end
+
+  def self.find(id)
+    sql = "SELECT * FROM service_users WHERE id = $1"
+    values = [id]
+    result = SqlRunner.run(sql, values)
+    return ServiceUser.new(result.first)
+  end
+
+  def self.delete_all()
+    sql = "DELETE FROM service_users"
+    SqlRunner.run(sql)
+  end
+
   def sort_visits_by_date()
     return visits().sort{|visit_1, visit_2| DateTime.parse(visit_1.visit_date + " " + visit_1.visit_time) <=>
     DateTime.parse(visit_2.visit_date + " " + visit_2.visit_time)}
   end
 
   def can_afford?(amount)
-    return @available_budget - amount > 0
+    return (@available_budget - amount > 0)
   end
 
   def reduce_budget(visit_id)
@@ -85,24 +105,6 @@ class ServiceUser
 
   def percentage_of_weekly_budget_used()
     return 100 - (100*@available_budget/@weekly_budget).to_i
-  end
-
-  def self.all()
-    sql = "SELECT * FROM service_users"
-    results = SqlRunner.run(sql)
-    return results.map{|service_user_info| ServiceUser.new(service_user_info)}
-  end
-
-  def self.find(id)
-    sql = "SELECT * FROM service_users WHERE id = $1"
-    values = [id]
-    result = SqlRunner.run(sql, values)
-    return ServiceUser.new(result.first)
-  end
-
-  def self.delete_all()
-    sql = "DELETE FROM service_users"
-    SqlRunner.run(sql)
   end
 
 end

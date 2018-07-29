@@ -45,7 +45,6 @@ post '/service_users/keyword_search' do
   @found_workers = Worker.sort_by_cost(@found_workers)
   @found_workers = Worker.remove_unapproved(@found_workers)
   @service_user = ServiceUser.find(params['service_user_id'])
-  # @service_user = ServiceUser.find(params['service_user_id'])
   erb(:"service_users/keyword_search")
 end
 
@@ -70,7 +69,10 @@ end
 get '/service_users/:id' do
   @service_user = ServiceUser.find(params['id'])
   for visit in @service_user.visits()
-    while CheckDate.is_in_past?(visit.get_database_visit_date(), visit.get_database_visit_time())
+
+    # Visits recur on a weekly basis, so we have to check the visits and add one week to the date if necessary. 
+
+    while CheckDate.is_in_past?(visit.visit_date(), visit.visit_time())
       visit.increase_date_by_a_week()
     end
   end

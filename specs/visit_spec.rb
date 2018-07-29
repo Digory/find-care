@@ -65,7 +65,7 @@ class VisitTest < MiniTest::Test
 
   def test_increase_date_by_a_week()
     @seeds.visit_1.increase_date_by_a_week()
-    actual = @seeds.visit_1.get_database_visit_date()
+    actual = @seeds.visit_1.visit_date()
     assert_equal('2018-06-08', actual)
   end
 

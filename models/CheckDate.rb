@@ -8,12 +8,10 @@ class CheckDate
     return DateTime.now > checked_date
   end
 
+  # Takes in a day of the week and time (e.g. "Tuesday" and "10am") and returns a Time object in the form that SQL likes (e.g. 2018-07-31 10:00:00).
+
   def self.find_next_day_of_the_week(day_of_the_week, time)
     return Chronic.parse("next #{day_of_the_week} at #{time}")
   end
-
-  # def self.get_words_from_date_and_time(date, time)
-  #   return DateTime.parse(date + " " + time).strftime("%A at %l:%M%P")
-  # end
 
 end

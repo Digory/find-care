@@ -17,7 +17,7 @@
         <ul>
           <h3>your schedule:</h3>
           <% for visit in @worker.visits() %>
-          <% while CheckDate.is_in_past?(visit.get_database_visit_date(), visit.get_database_visit_time()) %>
+          <% while CheckDate.is_in_past?(visit.visit_date(), visit.visit_time()) %>
           <% visit.increase_date_by_a_week() %>
           <% end %>
           <li><%=visit.get_details_for_worker()%>
@@ -34,8 +34,6 @@
             <% end %>
             <% end %>
           </ul>
-
-
         </div>
       </div>
     </div>
