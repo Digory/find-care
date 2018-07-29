@@ -1,30 +1,25 @@
 # find-care
-CodeClan solo project.
+CodeClan solo project utilising Ruby/PostgreSQL. A web app for helping people with disabilities find appropriate carers depending upon their budget. 
 
-CARE FINDER FOR DISABLED PEOPLE 
+-------------------------------------------------------------------------------------------------------------------------
 
-A web app for helping people with disabilities find appropriate care depending upon their budget. 
+BACKGROUND
 
-MVP
+The Social Care (Self Directed Support)(Scotland) Act 2014 allows individuals who receive care paid for by their local council
+to: Be told what their individual care budget is; and, take control of their budget, if they are capable. 
 
-A client (disabled person) can create, edit and delete a user account. They are able to search the database of support workers (carers) by filtering by specific criteria. 
+Individuals can choose to employ a care agency, or, if they wish, employ one or more support workers directly. The aim of the app is to make the process of employing a support worker easier.
 
-The client can book support workers and their budget is subsequently reduced, depending on the number of hours they have booked and the cost of the support worker.
+------------------------------------------------------------------------------------------------------------------------
 
-The user interface should be designed with accessibility in mind (e.g. for people that might be using screen readers etc.)
+WHAT THE APP DOES
 
-EXTENSION 1
+Both service users, and potential support workers, can create their own account. 
 
-The client interface should allow for a disabled person having a recurring budget (e.g. if they receive £1000 every month towards care). It should calculate what workers a client is able to continuously have without running out of money. For example, a client may be able to afford a more expensive worker for 12 hours a week, or a cheaper worker for 20 hours a week. 
+A support worker must specify the types of care experience they have and their hourly rate, before being approved by the site admin.
 
-A support worker can create a worker account. They list their hourly cost, number of hours of availability and the types of care experience they have. A message tells them if they are subsequently booked by a client.
+A service user specifies their weekly budget when they create an account. They can search for potential support workers by specific criteria or by keyword. They are told how many hours they are able to afford and are able to request timeslots from the worker. The worker sees that a request has been made when they log in to their account and they can confirm if they are able to do the visit. 
 
-EXTENSION 2
+The service user's account shows how much of their weekly budget they have used, and they are able to request visits until their budget has been filled. At any time they are able to cancel a visit. Visits recur on a weekly basis and service users and support workers are shown their timetable on their account homepage. A service user can have multiple workers and similarly a worker can support multiple service users.
 
-Clients are able to choose the specific hours of the week (e.g. 7am-9am Mondays) that they require care, and worker accounts consequently must specify the hours they are available. Clients are then able to filter their search for workers according to these hours.
-
-If a worker is booked for a specific time-slot they are unable to be booked by another client for that slot. 
-
-EXTENSION 3
-
-Clients are able to give each support worker a rating out of 5 stars. The average of these ratings is displayed on the worker's profile. Additionally, a client can search based upon this filter.
+The web layout is designed with the disabled user in mind and attempts to correspond to the Web Content Accessibility Guidelines 2.0 ( https://www.w3.org/TR/WCAG20/ )
