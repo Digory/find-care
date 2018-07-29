@@ -1,5 +1,5 @@
 # find-care
-CodeClan solo project utilising Ruby/PostgreSQL. A web app for helping people with disabilities find appropriate carers depending upon their budget. 
+CodeClan solo project utilising Ruby/Sinatra/PostgreSQL. A web app for helping people with disabilities find appropriate carers depending upon their budget. 
 
 -------------------------------------------------------------------------------------------------------------------------
 
