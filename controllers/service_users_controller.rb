@@ -1,6 +1,5 @@
 require('sinatra')
 require('sinatra/contrib/all') if development?
-also_reload('../models/*')
 require_relative('../models/ServiceUser')
 require_relative('../models/CheckDate')
 
@@ -70,7 +69,7 @@ get '/service_users/:id' do
   @service_user = ServiceUser.find(params['id'])
   for visit in @service_user.visits()
 
-    # Visits recur on a weekly basis, so we have to check the visits and add one week to the date if necessary. 
+    # Visits recur on a weekly basis, so we have to check the visits and add one week to the date if necessary.
 
     while CheckDate.is_in_past?(visit.visit_date(), visit.visit_time())
       visit.increase_date_by_a_week()
