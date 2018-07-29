@@ -26,7 +26,6 @@ class Worker
   # The @keywords string will be used to help with the keyword search.
 
    def create_keywords_string()
-  #   first_name = @name.slice(0..-4)
     @keywords << "#{name},"
     @keywords << "male, man, men," if @gender == "m"
     @keywords << "female, woman, women," if @gender == "f"
@@ -34,10 +33,6 @@ class Worker
     @keywords << "cheap, low cost," if @hourly_rate <= 8.75
     update()
   end
-
-  # def add_visit_awaiting_approval(visit)
-  #   @visits_awaiting_approval << visit
-  # end
 
   def get_info()
     info_string = "#{@name} is a "

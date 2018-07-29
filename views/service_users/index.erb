@@ -2,23 +2,23 @@
 
 
 <div class="page-heading">
-<h1>Service User login</h1>
+  <h1>Service User login</h1>
 </div>
 
 <div class="options" id="maincontent">
-<div class="greyButtonSmall">
-<ul>
-    <% for service_user in @service_users %>
-<li><%=service_user.name()%> &#8594 <a href="/service_users/<%=service_user.id()%>"> view your account </a>
-</li>
-<% end %>
-</ul>
-</div>
+  <div class="greyButtonSmall">
+    <ul>
+      <% for service_user in @service_users %>
+      <li><%=service_user.name()%> &#8594 <a href="/service_users/<%=service_user.id()%>"> view your account </a>
+      </li>
+      <% end %>
+    </ul>
+  </div>
 
 
-<div class="optionsPageBottom">
-  <div class="greyButtonLarge">
-  <a href="/service_users/new"><strong>Create new Service User account</strong></a>
-</div>
-</div>
+  <div class="optionsPageBottom">
+    <div class="greyButtonLarge">
+      <a href="/service_users/new"><strong>Create new Service User account</strong></a>
+    </div>
+  </div>
 </div>

@@ -1,16 +1,16 @@
 <title>Edit account</title>
 
 <div class="page-heading">
-<h1>Edit account</h1>
+  <h1>Edit account</h1>
 </div>
 
 
 <div id="maincontent">
-<form method="POST" action="/service_users/<%=@service_user.id%>">
-  <label for="service-user-name">Name:</label>
-  <input id="service-user-name" type="text" name="name" required="required" value="<%= @service_user.name() %>"/>
-  <label for="weekly-budget">Weekly Budget:</label>
-  <input id="weekly-budget" type="number" name="weekly_budget" required="required" value="<%= @service_user.weekly_budget() %>"/>
-  <input type="submit" value="Update Service User"/>
-</form>
+  <form method="POST" action="/service_users/<%=@service_user.id%>">
+    <label for="service-user-name">Name:</label>
+    <input id="service-user-name" type="text" name="name" required="required" value="<%= @service_user.name() %>"/>
+    <label for="weekly-budget">Weekly Budget:</label>
+    <input id="weekly-budget" type="number" name="weekly_budget" required="required" value="<%= @service_user.weekly_budget() %>"/>
+    <input type="submit" value="Update Service User"/>
+  </form>
 </div>

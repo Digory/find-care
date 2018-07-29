@@ -1,18 +1,18 @@
 <title>Edit or delete account</title>
 
 <div class="page-heading">
-<h1>Edit or delete account</h1>
+  <h1>Edit or delete account</h1>
 </div>
 
 <div class="optionsHorizontal" id="maincontent">
   <ul>
-<div class="greyButtonSmall">
-<li><a href="/service_users/<%=@service_user.id%>/edit">Edit Account</a></li>
-</div>
+    <div class="greyButtonSmall">
+      <li><a href="/service_users/<%=@service_user.id%>/edit">Edit Account</a></li>
+    </div>
 
 
-<li><form action="/service_users/<%=@service_user.id%>/delete" method="POST">
-  <input type="submit" value="Delete Account">
-</form></li>
-</ul>
+    <li><form action="/service_users/<%=@service_user.id%>/delete" method="POST">
+      <input type="submit" value="Delete Account">
+    </form></li>
+  </ul>
 </div>

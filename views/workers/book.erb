@@ -1,26 +1,26 @@
 <title>Request booking</title>
 <div class="page-heading">
-<h1>What days would you like to book <%=@worker.name()%> for?</h1>
+  <h1>What days would you like to book <%=@worker.name()%> for?</h1>
 </div>
 
 <div id="maincontent">
-<div class="profile-page-section">
-  <div class="options"><ul>
-<form action="/workers/confirm_booking?worker_id=<%=@worker.id()%>&service_user_id=<%=@service_user.id()%>" method="POST">
-<li><input type="checkbox" name="visit_days[]" value="Monday">Monday</li>
-<li><input type="checkbox" name="visit_days[]" value="Tuesday">Tuesday</li>
-<li><input type="checkbox" name="visit_days[]" value="Wednesday">Wednesday</li>
-<li><input type="checkbox" name="visit_days[]" value="Thursday">Thursday</li>
-<li><input type="checkbox" name="visit_days[]" value="Friday">Friday</li>
-<li><input type="checkbox" name="visit_days[]" value="Saturday">Saturday</li>
-<li><input type="checkbox" name="visit_days[]" value="Sunday">Sunday</li>
-<li><label for="time">Time of day:</label>
-<input id = "time" type="text" name="visit_time"></li>
-<li><label for="duration">For how many hours?</label>
-<input id="duration" type="number" name="duration"></li>
-<input type="submit" value="confirm request">
+  <div class="profile-page-section">
+    <div class="options"><ul>
+      <form action="/workers/confirm_booking?worker_id=<%=@worker.id()%>&service_user_id=<%=@service_user.id()%>" method="POST">
+        <li><input type="checkbox" name="visit_days[]" value="Monday">Monday</li>
+        <li><input type="checkbox" name="visit_days[]" value="Tuesday">Tuesday</li>
+        <li><input type="checkbox" name="visit_days[]" value="Wednesday">Wednesday</li>
+        <li><input type="checkbox" name="visit_days[]" value="Thursday">Thursday</li>
+        <li><input type="checkbox" name="visit_days[]" value="Friday">Friday</li>
+        <li><input type="checkbox" name="visit_days[]" value="Saturday">Saturday</li>
+        <li><input type="checkbox" name="visit_days[]" value="Sunday">Sunday</li>
+        <li><label for="time">Time of day:</label>
+          <input id = "time" type="text" name="visit_time"></li>
+          <li><label for="duration">For how many hours?</label>
+            <input id="duration" type="number" name="duration"></li>
+            <input type="submit" value="confirm request">
 
-</form></ul>
-</div>
-</div>
-</div>
+          </form></ul>
+        </div>
+      </div>
+    </div>

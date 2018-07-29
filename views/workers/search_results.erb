@@ -1,24 +1,24 @@
 <title>Search by keyword</title>
 
 <div class="page-heading">
-<h1>Search results</h1>
+  <h1>Search results</h1>
 </div>
 
 <div id="maincontent">
-<div class="profile-page-section">
-  <div class="options">
-  <div class="greyButtonSmall"><ul>
-<% for worker in @found_workers %>
-  <li><a href="/workers/view?worker_id=<%=worker.id()%>&service_user_id=<%=@service_user.id()%>">
-  <%= worker.get_info()%></a></li>
-  <li>you can afford <%=worker.hours_afforded(@service_user)%> hours</li>
-  <% end %>
-</ul>
-</div></div>
-</div>
   <div class="profile-page-section">
-  <div class="greyButtonSmall">
-    <a href="/service_users/show_search_options?service_user_id=<%=@service_user.id()%>">Back to search options</a>
+    <div class="options">
+      <div class="greyButtonSmall"><ul>
+      <% for worker in @found_workers %>
+      <li><a href="/workers/view?worker_id=<%=worker.id()%>&service_user_id=<%=@service_user.id()%>">
+        <%= worker.get_info()%></a></li>
+        <li>you can afford <%=worker.hours_afforded(@service_user)%> hours</li>
+        <% end %>
+      </ul>
+    </div></div>
   </div>
+  <div class="profile-page-section">
+    <div class="greyButtonSmall">
+      <a href="/service_users/show_search_options?service_user_id=<%=@service_user.id()%>">Back to search options</a>
+    </div>
   </div>
 </div>

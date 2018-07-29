@@ -2,19 +2,19 @@
 
 <div id="maincontent">
 
-<div class="page-heading">
-<h1>Are you sure you want to cancel this visit?</h1>
-</div>
+  <div class="page-heading">
+    <h1>Are you sure you want to cancel this visit?</h1>
+  </div>
 
-<div class="profile-page-section">
+  <div class="profile-page-section">
 
-<form action="/visits/<%=@visit.id()%>/delete" method="POST">
-  <input type="submit" value="Cancel Visit">
-</form>
-</div>
-<div class="profile-page-section">
-<div class="greyButtonSmall">
-<a href="#" onclick="history.go(-1)">Go Back</a>
-</div>
-</div>
+    <form action="/visits/<%=@visit.id()%>/delete" method="POST">
+      <input type="submit" value="Cancel Visit">
+    </form>
+  </div>
+  <div class="profile-page-section">
+    <div class="greyButtonSmall">
+      <a href="#" onclick="history.go(-1)">Go Back</a>
+    </div>
+  </div>
 </div>

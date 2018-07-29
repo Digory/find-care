@@ -1,61 +1,57 @@
 <title>Account Details</title>
 
 <div class="page-heading">
-<h1>Account details for <%= @service_user.name() %></h1>
+  <h1>Account details for <%= @service_user.name() %></h1>
 </div>
 
 <div id="progress-bar" class="all-rounded">
-    <div id="progress-bar-percentage" class="all-rounded" style="width: <%=@service_user.percentage_of_weekly_budget_used()%>%"><span><%=@service_user.percentage_of_weekly_budget_used()%>%</span></div>
+  <div id="progress-bar-percentage" class="all-rounded" style="width: <%=@service_user.percentage_of_weekly_budget_used()%>%"><span><%=@service_user.percentage_of_weekly_budget_used()%>%</span></div>
 </div>
 
 <div id="maincontent">
-    <div class="profile-page">
-      <p>You are currently using <strong>£<%=@service_user.string_value_of_weekly_budget_used()%></strong>, or <strong><%=@service_user.percentage_of_weekly_budget_used()%>%</strong>, of your weekly budget of <strong>£<%=@service_user.string_value_of_weekly_budget()%></strong></p>
+  <div class="profile-page">
+    <p>You are currently using <strong>£<%=@service_user.string_value_of_weekly_budget_used()%></strong>, or <strong><%=@service_user.percentage_of_weekly_budget_used()%>%</strong>, of your weekly budget of <strong>£<%=@service_user.string_value_of_weekly_budget()%></strong></p>
 
-      <div class="profile-page-section">
-        <h3>All visits</h3>
+    <div class="profile-page-section">
+      <h3>All visits</h3>
       <% for visit in @visits %>
-        <p><strong><%=visit.add_to_normal_visit_string()%></strong><%=visit.normal_visit_string()%>
-          <div class="profile-page-section">
+      <p><strong><%=visit.add_to_normal_visit_string()%></strong><%=visit.normal_visit_string()%>
+        <div class="profile-page-section">
           <div class="greyButtonSmall">
-          <a href="/visits/show_before_deletion?visit_id=<%=visit.id()%>">cancel above visit</a>
-        </div></div></p>
-        <% end %>
-    </div>
+            <a href="/visits/show_before_deletion?visit_id=<%=visit.id()%>">cancel above visit</a>
+          </div></div></p>
+          <% end %>
+        </div>
 
-    <div class="profile-page-section">
-      <h3>Your workers</h3>
-      <div class="options">
-      <div class="greyButtonSmall">
-        <ul>
-      <% for worker in @service_user.workers() %>
-        <li><a href="/workers/view?worker_id=<%=worker.id()%>&service_user_id=<%=@service_user.id()%>"><%=worker.name()%></a></li>
-        <% end %>
-      </ul>
-    </div>
+        <div class="profile-page-section">
+          <h3>Your workers</h3>
+          <div class="options">
+            <div class="greyButtonSmall">
+              <ul>
+                <% for worker in @service_user.workers() %>
+                <li><a href="/workers/view?worker_id=<%=worker.id()%>&service_user_id=<%=@service_user.id()%>"><%=worker.name()%></a></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-page-section">
+          <h3>Options</h3>
+          <div class="optionsHorizontal">
+
+            <div class="greyButtonLarge">
+
+              <a href="/service_users/show_search_options?service_user_id=<%=@service_user.id()%>">Search for a worker</a>
+
+              <a href="/service_users/show_edit_or_delete?service_user_id=<%=@service_user.id()%>">Edit or delete account</a>
+            </div>
+          </div>
+        </div>
+
+
+
+
       </div>
-    </div>
-<!--
-    <div class="profile-page-section">
-  <a href="/service_users/show_search_options?service_user_id=<%=@service_user.id()%>">Search for a worker</a>
-    </div> -->
-
-    <div class="profile-page-section">
-      <h3>Options</h3>
-    <div class="optionsHorizontal">
-
-<div class="greyButtonLarge">
-
-          <a href="/service_users/show_search_options?service_user_id=<%=@service_user.id()%>">Search for a worker</a>
-
-  <a href="/service_users/show_edit_or_delete?service_user_id=<%=@service_user.id()%>">Edit or delete account</a>
-</div>
-</div>
-</div>
-
-
-
 
     </div>
-
-  </div>

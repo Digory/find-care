@@ -1,42 +1,42 @@
 <title>Create new Support Worker account</title>
 
 <div class="page-heading">
-<h1>Create new Support Worker account</h1>
+  <h1>Create new Support Worker account</h1>
 </div>
 
-  <div id="maincontent">
-<h3>You will have to wait for admin approval before you can be booked.</h3>
+<div id="maincontent">
+  <h3>You will have to wait for admin approval before you can be booked.</h3>
 
-<div class="options"><ul>
-<form method="POST" action="/workers">
-  <li><label for="worker-name">Name of worker:</label>
-  <input id="worker-name" type="text" required="required" name="name"></li>
-  <li><label for="worker-gender">Gender:</label>
-  <select id="worker-gender" name="gender">
-    <option value="m">male</option>
-    <option value="f">female</option>
-    <option value="a">prefer not to say</option>
-  </select></li>
-  <li><label for="worker-can-drive">Can you drive?</label>
-  <select id="worker-can-drive" name="can_drive">
-    <option value="t">yes</option>
-    <option value="f">no</option>
-  </select></li>
-  <li><label for="hourly-rate">Hourly rate:</label>
-  <input id="hourly-rate" type="number" name="hourly_rate" required="required"></li>
-  <li><label for="experience[]">Experience:</label>
+  <div class="options"><ul>
+    <form method="POST" action="/workers">
+      <li><label for="worker-name">Name of worker:</label>
+        <input id="worker-name" type="text" required="required" name="name"></li>
+        <li><label for="worker-gender">Gender:</label>
+          <select id="worker-gender" name="gender">
+            <option value="m">male</option>
+            <option value="f">female</option>
+            <option value="a">prefer not to say</option>
+          </select></li>
+          <li><label for="worker-can-drive">Can you drive?</label>
+            <select id="worker-can-drive" name="can_drive">
+              <option value="t">yes</option>
+              <option value="f">no</option>
+            </select></li>
+            <li><label for="hourly-rate">Hourly rate:</label>
+              <input id="hourly-rate" type="number" name="hourly_rate" required="required"></li>
+              <li><label for="experience[]">Experience:</label>
 
-    <input type="checkbox" name="experience[]" value="Autism">Autism
-    <input type="checkbox" name="experience[]" value="Sign Language">Sign Language<li>
-  <li>  <input type="checkbox" name="experience[]" value="Moving and Handling">Moving and Handling
-    <input type="checkbox" name="experience[]" value="First Aid">First Aid</li>
-  <li>  <input type="checkbox" name="experience[]" value="Food Hygiene">Food Hygiene
-    <input type="checkbox" name="experience[]" value="Visual Impairment">Visual Impairment </li>
-  <li>  <input type="checkbox" name="experience[]" value="Peg Feeding">Peg Feeding
-    <input type="checkbox" name="experience[]" value="Children">Children </li>
-  <li>  <input type="checkbox" name="experience[]" value="none" checked>none</li>
+                <input type="checkbox" name="experience[]" value="Autism">Autism
+                <input type="checkbox" name="experience[]" value="Sign Language">Sign Language<li>
+                  <li>  <input type="checkbox" name="experience[]" value="Moving and Handling">Moving and Handling
+                    <input type="checkbox" name="experience[]" value="First Aid">First Aid</li>
+                    <li>  <input type="checkbox" name="experience[]" value="Food Hygiene">Food Hygiene
+                      <input type="checkbox" name="experience[]" value="Visual Impairment">Visual Impairment </li>
+                      <li>  <input type="checkbox" name="experience[]" value="Peg Feeding">Peg Feeding
+                        <input type="checkbox" name="experience[]" value="Children">Children </li>
+                        <li>  <input type="checkbox" name="experience[]" value="none" checked>none</li>
 
-    <input type="submit" value="Create worker">
-</form>
-</ul>
-</div>
+                        <input type="submit" value="Create worker">
+                      </form>
+                    </ul>
+                  </div>
