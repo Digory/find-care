@@ -74,7 +74,15 @@ class Visit
     sql = "UPDATE visits SET visit_date = visit_date + 7 WHERE id = $1"
     values = [@id]
     SqlRunner.run(sql, values)
-    @visit_date = visit_date()
+    @visit_date = database_visit_date()
+  end
+
+  def database_visit_date()
+    sql = "SELECT visit_date FROM VISITS WHERE id = $1"
+    values = [@id]
+    result = SqlRunner.run(sql, values)
+    p result[0]['visit_date']
+    return result[0]['visit_date']
   end
 
   # The service user can select multiple days, so multiple visits may be created. If the service user cannot afford the total cost then no visits will be created.
