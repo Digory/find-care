@@ -80,11 +80,11 @@ class Worker
   # The @keywords string will be used to help with the keyword search.
 
   def create_keywords_string()
-    @keywords << "#{name},"
-    @keywords << "male, man, men," if @gender == "m"
-    @keywords << "female, woman, women," if @gender == "f"
-    @keywords << "can drive, driver, driving," if @can_drive == true
-    @keywords << "cheap, low cost," if @hourly_rate <= 8.75
+    @keywords << "#{name}"
+    @keywords << " | male | man | men" if @gender == "m"
+    @keywords << " | female | woman | women" if @gender == "f"
+    @keywords << " | can drive | driver | driving" if @can_drive == true
+    @keywords << " | cheap | low cost" if @hourly_rate <= 8.75
     update()
   end
 
@@ -147,7 +147,7 @@ class Worker
 
   def does_experience_match_all_filters?(searched_array)
     return true if searched_array.include?("any")
-    worker_experience_array = @experience.split(",")
+    worker_experience_array = @experience.split(" | ")
     return searched_array.all?{|string| worker_experience_array.include?(string)}
   end
 
@@ -168,7 +168,7 @@ class Worker
   #  Creates a string array and iterates through it, then returns true if any word matches the searched word by at least a certain percentage.
 
   def experience_matches?(compared, searched, percentage)
-    compared_string_array = compared.split(",")
+    compared_string_array = compared.split(" | ")
     for string in compared_string_array
       return true if string.strip.downcase.similar(searched.strip.downcase) >= percentage
     end

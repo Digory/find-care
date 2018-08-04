@@ -23,7 +23,7 @@ post '/workers' do
   worker = Worker.new(params)
   experience_string = ""
   for experience in params['experience']
-    experience_string += experience + ","
+    experience_string += experience + " | "
   end
   worker.experience = experience_string
   worker.save()
