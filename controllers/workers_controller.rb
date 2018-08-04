@@ -25,6 +25,7 @@ post '/workers' do
   for experience in params['experience']
     experience_string += experience + " | "
   end
+  experience_string.chomp!(" | ")
   worker.experience = experience_string
   worker.save()
   erb(:"workers/new_success")
