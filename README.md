@@ -1,18 +1,24 @@
 # find-care
 CodeClan solo project utilising Ruby/Sinatra/PostgreSQL. A web app for helping people with disabilities find appropriate carers depending upon their budget. 
 
--------------------------------------------------------------------------------------------------------------------------
-
+-----------------------------------------------------------------------------------------------------------------------
 BACKGROUND
+------------------------------------------------------------------------------------------------------------------------
 
 The Social Care (Self Directed Support)(Scotland) Act 2014 allows individuals who receive care paid for by their local council
-to: Be told what their individual care budget is; and, take control of their budget, if they are capable. 
+to: 
+
+Be told what their individual care budget is.  
+
+And, take control of their budget, if they are capable. 
 
 Individuals can choose to employ a care agency, or, if they wish, employ one or more support workers directly. The aim of the app is to make the process of employing a support worker easier.
 
 ------------------------------------------------------------------------------------------------------------------------
-
 WHAT THE APP DOES
+------------------------------------------------------------------------------------------------------------------------
+
+(see the app in action here: http://find-care.herokuapp.com )
 
 Both service users, and potential support workers, can create their own account. 
 
